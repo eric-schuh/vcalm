@@ -1111,6 +1111,36 @@ endpoints defined by this specification MUST be serialized as JSON and include
 the `Content-Type` header with a media type value of `application/json`.
         </p>
       </section>
+      <section class="informative notoc">
+        <h3>Credential and Presentation Objects in API Descriptions</h3>
+        <p>
+The OpenAPI descriptions in this specification represent
+[=verifiable credential=] and [=verifiable presentation=] request and
+response bodies using a minimal property table: <code>@context</code> and
+<code>type</code>. This keeps the API description focused on what VCALM
+defines — HTTP endpoints, request and response structure,
+<code>options</code>, workflows, exchanges, and related coordinator and
+service behavior — rather than repeating the full graph of a
+[=verifiable credential=] or [=verifiable presentation=] in every endpoint
+table.
+        </p>
+        <p>
+The semantic content of credentials and presentations exchanged through
+these APIs is defined by the Verifiable Credentials ecosystem specifications
+that apply to a given deployment. VCALM interop testing is intended to
+exercise API behavior; data model conformance is out of scope for this
+specification and is covered by separate test suites.
+        </p>
+        <p>
+Where this specification needs to express support for alternate
+serializations at the API boundary, it does so explicitly through
+<code>EnvelopedVerifiableCredential</code>,
+<code>EnvelopedVerifiablePresentation</code>, and negotiation properties such
+as <code>acceptedEnvelopes</code> and <code>acceptedCryptosuites</code> in
+[=verifiable presentation requests=]. See Section
+[[[#requesting-a-presentation]]].
+        </p>
+      </section>
       <section class="notoc">
         <h4>Payload Sizes</h4>
         <p>
