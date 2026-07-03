@@ -875,24 +875,7 @@ components:
             "@context": [
               "https://www.w3.org/ns/credentials/v2"
             ],
-            "id": "https://issuer.example.com/credentials/status/lists/abc123",
-            "type": ["VerifiableCredential", "BitstringStatusListCredential"],
-            "issuer": "did:example:issuer",
-            "validFrom": "2024-01-01T00:00:00Z",
-            "credentialSubject": {
-              "id": "https://issuer.example.com/credentials/status/lists/abc123#list",
-              "type": "BitstringStatusList",
-              "statusPurpose": "revocation",
-              "encodedList": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAAAAACAP2A1AQAAZQAAAIA..."
-            },
-            "proof": {
-              "type": "DataIntegrityProof",
-              "cryptosuite": "eddsa-rdfc-2022",
-              "verificationMethod": "did:example:issuer#key-1",
-              "created": "2024-01-01T00:00:00Z",
-              "proofPurpose": "assertionMethod",
-              "proofValue": "z..."
-            }
+            "type": ["VerifiableCredential", "BitstringStatusListCredential"]
           }
         }
     IssueCredentialRequest:
