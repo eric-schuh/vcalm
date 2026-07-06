@@ -880,7 +880,7 @@ and allowed actions, among other important properties.
   "id": "urn:uuid:cdc77118-6bfa-11ec-aceb-10bf48838a41",
   "parentCapability": "urn:zcap:root:https%3A%2F%2Fvcalm-instances.example.com%2Fissuers%2Fb77c9b57-c321-4d14-902c-8f442a37707d%2Fworkflows%2Fa6513552-8e5a-4efa-b36e-1fb2a8e06822%2Fexchanges",
   "controller": "did:key:z6MknBxrctS4KsfiBsEaXsfnrnfNYTvDjVpLYYUAN6PX2EfG",
-  "invocationTarget": "https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges",
+  "invocationTarget": "https://vcalm-instances.example.com/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges",
   "expires": "2027-06-30T16:45:73Z",
   "allowedAction": [
     "write",
@@ -905,7 +905,7 @@ provided path as a prefix, as permitted by `invocationTarget` and `allowedAction
 in the ZCAP. The `write` action enables operations that create and/or update
 resources in the system to be performed on the provided path, or on any path
 that contains the provided path as a prefix, as permitted by `invocationTarget`
-and `allowedAction` in the ZCAP. In order to enforce the principle of
+and `allowedAction` in the ZCAP. To enforce the principle of
 least privilege, implementers are expected to apply the following best practices:
           </p>
           <ol>
@@ -913,7 +913,7 @@ least privilege, implementers are expected to apply the following best practices
 Ensure that ZCAPs identify a specific URL that references resources via the `invocationTarget` property
 and the client that is authorized to access those resources via the `controller` property.
 This enables the ZCAP to be pinned to a particular client and server (along with its resources).
-Example `invocationTarget` value: `https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822`.
+Example `invocationTarget` value: `https://vcalm-instances.example.com/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822`.
 Example `controller` value: `did:key:z6MknBxrctS4KsfiBsEaXsfnrnfNYTvDjVpLYYUAN6PX2EfG`.
             </li>
             <li>
@@ -930,16 +930,17 @@ Examples of valid delegated capability subsets are shown below:
           <ul>
             <li>
               <h4>
-Allow a client controller to retrieve the configuration
+Allow a client controller to update or retrieve the configuration
 of a particular workflow instance
 (a ZCAP with this subset is expected to be distributed to an administrator)
               </h4>
-              <pre title="Retrieve Workflow Configuration">
+              <pre title="Update or Retrieve Workflow Configuration">
 {
   ...
   "controller": "did:key:z6MknBxrctS4KsfiBsEaXsfnrnfNYTvDjVpLYYUAN6PX2EfG",
-  "invocationTarget": "https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822",
+  "invocationTarget": "https://vcalm-instances.example.com/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822",
   "allowedAction": [
+    "write",
     "read"
   ],
   ...
@@ -948,34 +949,17 @@ of a particular workflow instance
             </li>
             <li>
               <h4>
-Allow a client controller to create an exchange
-on a particular workflow instance
+Allow a client controller to create exchanges or retrieve the state of any exchange
+from a particular workflow instance
 (a ZCAP with this subset is expected to be distributed to a coordinator)
               </h4>
-              <pre title="Create Exchange">
+              <pre title="Create Exchange or Retrieve Exchange State">
 {
   ...
   "controller": "did:key:z6MknBxrctS4KsfiBsEaXsfnrnfNYTvDjVpLYYUAN6PX2EfG",
-  "invocationTarget": "https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges",
+  "invocationTarget": "https://vcalm-instances.example.com/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges",
   "allowedAction": [
-    "write"
-  ],
-  ...
-}
-              </pre>
-            </li>
-            <li>
-              <h4>
-Allow a client controller to retrieve the state of an exchange
-originating from a particular workflow instance
-(a ZCAP with this subset is expected to be distributed to a coordinator)
-              </h4>
-              <pre title="Retrieve Exchange State">
-{
-  ...
-  "controller": "did:key:z6MknBxrctS4KsfiBsEaXsfnrnfNYTvDjVpLYYUAN6PX2EfG",
-  "invocationTarget": "https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges",
-  "allowedAction": [
+    "write",
     "read"
   ],
   ...
