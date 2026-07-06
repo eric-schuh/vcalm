@@ -860,8 +860,8 @@ a path within that domain (e.g., <code>website.example/api</code>).
           <h4>OAuth 2.0</h4>
           <p>
 If the OAuth 2.0 Authorization Framework [[RFC6749]] is used for authorization,
-the access tokens used by clients MAY be OAuth 2.0 Bearer Tokens [[RFC6750]] or
-any other valid OAuth 2.0 token type. Any valid OAuth 2.0 grant type MAY be used
+the access tokens used by clients are expected to be OAuth 2.0 Bearer Tokens [[RFC6750]] or
+any other valid OAuth 2.0 token type. Any valid OAuth 2.0 grant type can be used
 to request the access tokens.
           </p>
           <table class="simple">
@@ -881,14 +881,14 @@ the system to be performed on the provided path, or on any path containing the
 provided path as a prefix. The `write` operation enables actions that create
 and/or update resources in the system to be performed on the provided path, or
 on any path that contains the provided path as a prefix. In order to enforce the
-principle of least privilege, implementers SHOULD apply the following best practices:
+principle of least privilege, implementers are expected to apply the following best practices:
           </p>
           <ol>
             <li>
 Ensure that access tokens expressed as JSON Web Tokens include an `aud` (audience)
 claim that identifies a specific instance for which the access token applies,
 allowing the token to be pinned to a particular instance. For multi-tenant deployments,
-this SHOULD include the component instance of interest.
+this is expected to include the component instance of interest.
 Example `aud` value: `https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d`.
             </li>
             <li>
@@ -908,20 +908,20 @@ Examples of valid OAuth 2.0 scopes are shown below:
           <ul>
             <li>
 `read:/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822` would allow a client to retrieve the configuration of a particular workflow instance
-(distribute access tokens with this scope to an administrator).
+(an access token with this scope is expected to be distributed to an administrator).
             </li>
             <li>
 `write:/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges` would allow a client to create an exchange on a particular workflow instance
-(distribute access tokens with this scope to a coordinator).
+(an access token with this scope is expected to be distributed to a coordinator).
             </li>
             <li>
 `read:/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges` would allow a client to retrieve the state of an exchange originating from a particular workflow instance
-(distribute access tokens with this scope to a coordinator).
+(an access token with this scope is expected to be distributed to a coordinator).
             </li>
             <li>
 `write:/credentials/issue` would allow a client to access the credential issuance API endpoint on the
 issuer instance identified in the audience (if provided, else any issuer instance) of the access token
-(distribute access tokens with this scope to an issuer coordinator or a workflow service).
+(an access token with this scope is expected to be distributed to an issuer coordinator or a workflow service).
             </li>
           </ul>
 
