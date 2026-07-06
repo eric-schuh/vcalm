@@ -866,7 +866,7 @@ a path within that domain (e.g., <code>website.example/api</code>).
           <h4>Authorization Capabilities</h4>
           <p>
 If Authorization Capabilities (ZCAPs) are used for authorization,
-the administrator SHOULD delegate a ZCAP with the appropriate
+the administrator is expected to delegate a ZCAP with the appropriate
 format as defined in [[[ZCAP]]] and as required for the use case.
 This includes appropriate values for the controller, invocation target,
 and allowed actions, among other important properties.
@@ -906,7 +906,7 @@ in the ZCAP. The `write` action enables operations that create and/or update
 resources in the system to be performed on the provided path, or on any path
 that contains the provided path as a prefix, as permitted by `invocationTarget`
 and `allowedAction` in the ZCAP. In order to enforce the principle of
-least privilege, implementers SHOULD apply the following best practices:
+least privilege, implementers are expected to apply the following best practices:
           </p>
           <ol>
             <li>
@@ -932,7 +932,7 @@ Examples of valid delegated capability subsets are shown below:
               <h4>
 Allow a client controller to retrieve the configuration
 of a particular workflow instance
-(distribute ZCAPs with this subset to an administrator)
+(a ZCAP with this subset is expected to be distributed to an administrator)
               </h4>
               <pre title="Retrieve Workflow Configuration">
 {
@@ -950,7 +950,7 @@ of a particular workflow instance
               <h4>
 Allow a client controller to create an exchange
 on a particular workflow instance
-(distribute ZCAPs with this subset to a coordinator)
+(a ZCAP with this subset is expected to be distributed to a coordinator)
               </h4>
               <pre title="Create Exchange">
 {
@@ -968,7 +968,7 @@ on a particular workflow instance
               <h4>
 Allow a client controller to retrieve the state of an exchange
 originating from a particular workflow instance
-(distribute ZCAPs with this subset to a coordinator)
+(a ZCAP with this subset is expected to be distributed to a coordinator)
               </h4>
               <pre title="Retrieve Exchange State">
 {
@@ -986,7 +986,7 @@ originating from a particular workflow instance
               <h4>
 Allow a client controller to access the credential issuance API endpoint
 on the issuer instance identified in the ZCAP
-(distribute ZCAPs with this subset to an issuer coordinator or
+(a ZCAP with this subset is expected to be distributed to an issuer coordinator or
 a workflow service)
               </h4>
               <pre title="Issue Credential">
