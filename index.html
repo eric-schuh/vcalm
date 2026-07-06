@@ -1491,7 +1491,7 @@ A REQUIRED property that specifies the information requested by the
 [=verifier=]. The value MUST be one or more [=maps=] where each [=map=] MUST
 define a `type` property with an associated [=string=] value.
           </dd>
-          <dt><dfn class="export">domain</dfn></dt>
+          <dt><dfn class="export" data-dfn-for="verifiable presentation request">domain</dfn></dt>
           <dd>
 An OPTIONAL [=string=] that a [=verifier=] provides to a [=holder=] during a
 [=presentation request=]. The [=holder=] checks to ensure that the data is
@@ -1501,7 +1501,7 @@ is used to ensure that the [=holder=] limits their [=verifiable presentation=]
 to a specific [=verifier=], protecting the [=verifier=] against
 <a data-cite="?VC-DATA-MODEL-2.0#replay-attack">replay attacks</a>.
           </dd>
-          <dt><dfn class="export">challenge</dfn></dt>
+          <dt><dfn class="export" data-dfn-for="verifiable presentation request">challenge</dfn></dt>
           <dd>
 An OPTIONAL, unique [=string=] that is provided by a [=verifier=] to a
 [=holder=] during a specific [=presentation request=]. The [=holder=] includes
