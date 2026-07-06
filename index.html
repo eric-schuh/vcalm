@@ -880,7 +880,7 @@ The `read` operation enables actions that do not create or update resources in
 the system to be performed on the provided path, or on any path containing the
 provided path as a prefix. The `write` operation enables actions that create
 and/or update resources in the system to be performed on the provided path, or
-on any path that contains the provided path as a prefix. In order to enforce the
+on any path that contains the provided path as a prefix. To enforce the
 principle of least privilege, implementers are expected to apply the following best practices:
           </p>
           <ol>
@@ -919,7 +919,7 @@ Examples of valid OAuth 2.0 scopes are shown below:
 (an access token with this scope is expected to be distributed to a coordinator).
             </li>
             <li>
-`write:/credentials/issue` would allow a client to access the credential issuance API endpoint on the
+`write:/credentials/issue` would allow a client to access the API endpoint for credential issuance on the
 issuer instance identified in the audience (if provided, else any issuer instance) of the access token
 (an access token with this scope is expected to be distributed to an issuer coordinator or a workflow service).
             </li>
@@ -933,7 +933,7 @@ coordinators=] might use different [=issuer=] [=instances=] hosted on the same
 expressed as JSON Web Tokens include an `aud` (audience) claim that identifies a
 specific instance for which the access token applies, allowing the token
 to be pinned to a particular instance. It is advised that OAuth 2.0 scopes be
-kept as narrow as possible without becoming overly burdensome to security administrators.
+kept as narrow as possible without making them overly burdensome to security administrators.
           </p>
         </section>
 
