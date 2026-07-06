@@ -885,11 +885,11 @@ principle of least privilege, implementers are expected to apply the following b
           </p>
           <ol>
             <li>
-Ensure that access tokens expressed as JSON Web Tokens include an `aud` (audience)
+Ensure that access tokens expressed as JSON Web Tokens (JWT) include an `aud` (audience)
 claim that identifies a specific instance for which the access token applies,
 allowing the token to be pinned to a particular instance. For multi-tenant deployments,
 this is expected to include the component instance of interest.
-Example `aud` value: `https://vcalm-instances.example.com/issuers/b77c9b57-c321-4d14-902c-8f442a37707d`.
+Example `aud` value: `https://vcalm-instances.example.com/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822`.
             </li>
             <li>
 Include the entire API path (excluding the domain and component instance, which are captured in `aud`)
@@ -907,21 +907,24 @@ Examples of valid OAuth 2.0 scopes are shown below:
           </p>
           <ul>
             <li>
-`read:/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822` would allow a client to retrieve the configuration of a particular workflow instance
-(an access token with this scope is expected to be distributed to an administrator).
+`read:/` would allow a client to retrieve resources via any API on a particular instance
+(an access token with this scope is expected to be distributed to an administrator and the full instance ID would be included in the decoded JWT's `aud` claim).
             </li>
             <li>
-`write:/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges` would allow a client to create an exchange on a particular workflow instance
-(an access token with this scope is expected to be distributed to a coordinator).
+`write:/` would allow a client to create and modify resources via any API on a particular instance
+(an access token with this scope is expected to be distributed to an administrator and the full instance ID would be included in the decoded JWT's `aud` claim).
             </li>
             <li>
-`read:/workflows/a6513552-8e5a-4efa-b36e-1fb2a8e06822/exchanges` would allow a client to retrieve the state of an exchange originating from a particular workflow instance
-(an access token with this scope is expected to be distributed to a coordinator).
+`write:/exchanges` would allow a client to create an exchange on a particular workflow instance
+(an access token with this scope is expected to be distributed to a coordinator and the full workflow instance ID would be included in the decoded JWT's `aud` claim).
             </li>
             <li>
-`write:/credentials/issue` would allow a client to access the API endpoint for credential issuance on the
-issuer instance identified in the audience (if provided, else any issuer instance) of the access token
-(an access token with this scope is expected to be distributed to an issuer coordinator or a workflow service).
+`read:/exchanges` would allow a client to retrieve the state of an exchange originating from a particular workflow instance
+(an access token with this scope is expected to be distributed to a coordinator and the full workflow instance ID would be included in the decoded JWT's `aud` claim).
+            </li>
+            <li>
+`write:/credentials/issue` would allow a client to access the API endpoint for credential issuance on a particular issuer instance
+(an access token with this scope is expected to be distributed to an issuer coordinator or a workflow service and the full issuer instance ID would be included in the decoded JWT's `aud` claim).
             </li>
           </ul>
 
