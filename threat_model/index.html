@@ -330,10 +330,10 @@
           as part of this process it reaches out to the <strong>State of Newtopia’s status service</strong> (<a>P9</a>) to check the contained 
           VC’s status (<a>F14</a>). When verification is complete, the verification service returns the verification results to the [=workflow service=] (<a>F15</a>). 
         </p>
-        <p>The [=workflow service=], continuing the workflow by checking the results of the verification and executing any additional business logic 
+        <p>The [=workflow service=] continues the workflow by checking the results of the verification and executing any additional business logic 
           specified by the workflow, resulting in the [=workflow service=] determining the provided proof of EMT certification is acceptable and 
           that it will issue an incident activation credential to Sachin. To simplify the diagram, it was decided that the newly issued credential 
-          will be issued to the same identifier that the proof EMT credential was issued to. In fullness the workflow could include an additional 
+          would be issued to the same identifier that the proof EMT credential was issued to. In fullness, the workflow could include an additional 
           request to Sachin’s wallet coordinator to provide an identifier to issue the new credential to. 
         </p>
         <p>Once the [=workflow service=] has decided to issue the new credential, it reaches out to its <strong>[=issuer service=]</strong> (<a>P7</a>) and 
