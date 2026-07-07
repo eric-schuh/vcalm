@@ -342,10 +342,10 @@
           <strong>status list</strong> (<a>D10</a>) (<a>F17</a>). The [=issuer service=] then completes its work, assigning one of the status list indexes to 
           this credential per its policies, and returning the issued credential to the [=workflow service=] (<a>F18</a>). 
         </p>
-        <p>The [=workflow service=] packages the credential in a <strong>VP</strong> (<a>D7</a>) and returns it to Sachin’s wallet coordinator (<a>F19</a>) 
-          which verifies the VP itself before storing the contained credential in the wallet service (<a>F20</a>). Between flows 18 and 19 Sachin’s wallet 
+        <p>The [=workflow service=] packages the credential in a <strong>VP</strong> (<a>D7</a>) and returns it to Sachin’s wallet coordinator (<a>F19</a>), 
+          which verifies the VP itself before storing the credential contained therein in the wallet service (<a>F20</a>). Between flows [=F18=] and [=F19=], Sachin’s wallet 
           has the opportunity to ask Sachin if he wants to take any actions prior to storing the received credential, such as confirming that he 
-          wants to store the credential or choosing a storage location. Here we assume Sachin’s wallet settings are such that the credential is simply stored. 
+          wants to store the credential and/or choose a non-default storage location. Here we assume Sachin’s wallet settings are such that the credential is simply stored. 
           Sachin is then redirected back to the Incident Command website (<a>F21</a>, <a>F22</a>) 
           where he now sees a confirmation page that confirms he has been added to the incident.   
         </p>
