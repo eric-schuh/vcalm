@@ -264,8 +264,9 @@
           </ol>
       <h3 id="general-architecture-choices">General Architecture Choices</h3>
         <p>All storage services were left off this diagram due to the interactions between them and their corresponding 
-          services being deemed uninteresting for the purpose of this threat modeling exercise as the VCALM 
-          specification does not specify any API related to how a service talks to its storage. </p>
+          services being deemed irrelevant for this threat modeling exercise because the VCALM 
+          specification does not specify any API related to how a service talks to its storage. 
+          Such APIs should provide their own threat model for evaluation by implementers.</p>
       <h3 id="holder-architecture-choices">Holder Architecture Choices</h3>
         <p>The holder is making use of a web-based digital wallet, not an independent wallet application. 
           This means that the [=holder coordinator=] was modelled as being its own container within the holder’s 
