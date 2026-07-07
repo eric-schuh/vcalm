@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  version: "0.0.3-unstable"
-  title: VC API
-  description: This is an Experimental Open API Specification for the [VC Data Model](https://www.w3.org/TR/vc-data-model/).
+  version: "1.0.0"
+  title: Simple W3C Presentation Schema
+  description: This specifies a simplified W3C presentation schema sufficient for the purposes of VCALM.
   license:
     name: W3C Software and Document License
     url: http://www.w3.org/Consortium/Legal/copyright-software.
@@ -12,9 +12,9 @@ info:
 paths:
 components:
   schemas:
-    Presentation:
+    PresentationDocument:
       type: object
-      description: A JSON-LD Verifiable Presentation without a proof.
+      description: A JSON-LD Verifiable Presentation document.
       properties:
         "@context":
           type: array
@@ -26,6 +26,14 @@ components:
           description: The JSON-LD type of the presentation.
           items:
             type: string
+    Presentation:
+      description: >
+        A JSON-LD presentation document used where the API expects an input
+        presentation to be created or processed, such as in
+        CreatePresentationRequest.presentation. The document MAY include an
+        embedded proof.
+      allOf:
+        - $ref: "#/components/schemas/PresentationDocument"
       example:
         {
           "@context":

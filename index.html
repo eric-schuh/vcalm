@@ -1132,6 +1132,17 @@ exercise API behavior; data model conformance is out of scope for this
 specification and is covered by separate test suites.
         </p>
         <p>
+OpenAPI uses separate schema names for the same sparse property table
+where the API distinguishes roles: <code>Credential</code> and
+<code>Presentation</code> for input documents (for example,
+<code>credential</code> in an issue request), and
+<code>VerifiableCredential</code> and <code>VerifiablePresentation</code>
+where a secured artifact is expected (for example,
+<code>verifiableCredential</code> in a response). The schemas share the
+same underlying document shape; the names signal API usage rather than
+different normative data model requirements.
+        </p>
+        <p>
 Where this specification needs to express support for alternate
 serializations at the API boundary, it does so explicitly through
 <code>EnvelopedVerifiableCredential</code>,

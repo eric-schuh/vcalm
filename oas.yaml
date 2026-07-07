@@ -899,7 +899,7 @@ components:
       type: object
       properties:
         credential:
-          $ref: "./components/Credential.yml#/components/schemas/UnsecuredCredential"
+          $ref: "./components/Credential.yml#/components/schemas/Credential"
         options:
           $ref: "./components/IssueCredentialOptions.yml#/components/schemas/IssueCredentialOptions"
     IssueCredentialResponse:
