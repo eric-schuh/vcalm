@@ -340,7 +340,7 @@
           provides all the necessary information for the new credential to be issued appropriately (<a>F16</a>). As this is the first credential of 
           this type being created, the [=issuer service=] reaches out to its <strong>status service</strong> (<a>P8</a>) to create a new 
           <strong>status list</strong> (<a>D10</a>) (<a>F17</a>). The [=issuer service=] then completes its work, assigning one of the status list indexes to 
-          this credential per its policies and returns the issued credential to the [=workflow service=] (<a>F18</a>). 
+          this credential per its policies, and returning the issued credential to the [=workflow service=] (<a>F18</a>). 
         </p>
         <p>The [=workflow service=] packages the credential in a <strong>VP</strong> (<a>D7</a>) and returns it to Sachin’s wallet coordinator (<a>F19</a>) 
           which verifies the VP itself before storing the contained credential in the wallet service (<a>F20</a>). Between flows 18 and 19 Sachin’s wallet 
