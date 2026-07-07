@@ -325,7 +325,7 @@
           The wallet coordinator then asks the wallet service to create a <strong>verifiable presentation</strong> (VP) (<a>D6</a>) (<a>F11</a>) which is 
           sent back to the [=workflow service=] (<a>F12</a>) using the exchange. 
         </p>
-        <p>Once the [=workflow service=] has the <strong>VP</strong> (<a>D6</a>) it does any processing specified by the workflow on the returned VP, 
+        <p>Once the [=workflow service=] has the <strong>VP</strong> (<a>D6</a>), it does any processing specified by the workflow on the returned VP, 
           before sending it to its <strong>[=verifier service=]</strong> (<a>P6</a>) to get verified (<a>F13</a>). The verification service verifies the provided VP, 
           as part of this process it reaches out to the <strong>State of Newtopia’s status service</strong> (<a>P9</a>) to check the contained 
           VC’s status (<a>F14</a>). When verification is complete, the verification service returns the verification results to the [=workflow service=] (<a>F15</a>). 
