@@ -3057,6 +3057,7 @@ sequenceDiagram
   participant W as Holder Coordinator (Wallet)
   participant B as Browser
   participant I as Issuer Coordinator
+  participant WS as Workflow Service
   autonumber
   H->>B: Click "Receive credential"
   B->>I: Request interaction QR Code
@@ -3071,7 +3072,7 @@ sequenceDiagram
   Note left of I: (VCALM, OID4VP, NFC, Bluetooth, etc.)
   W->>W: Select appropriate protocol
   opt "vcapi" protocol example
-  W->>I: Initiate workflow exchange
+  W->>WS: Initiate workflow exchange
   W->>H: Acquire consent to proceed
   Note right of H: issuer.example is offering credentials, accept?
   end
@@ -3093,6 +3094,7 @@ sequenceDiagram
   participant W as Holder Coordinator (Wallet)
   participant B as Browser
   participant V as Verifier Coordinator
+  participant WS as Workflow Service
   autonumber
   H->>B: Click "Share credential"
   B->>V: Request interaction QR Code
@@ -3109,7 +3111,7 @@ sequenceDiagram
   Note right of H: verifier.example is requesting credentials, proceed?
   W->>W: Select appropriate protocol
   opt "vcapi" protocol example
-  W->>V: Initiate workflow exchange
+  W->>WS: Initiate workflow exchange
   end
         </pre>
         <figcaption>
