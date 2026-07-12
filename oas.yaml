@@ -281,9 +281,10 @@ paths:
     post:
       summary: Participate in an exchange. Posting an empty body will start the exchange or return
         what the exchange is expecting to complete the next step. Posting a Verifiable Presentation Request
-        will result in either a 4xx error or one of the following - a Verifiable Presentation
-        or Verifiable Presentation Request that conforms to the client's request. If a Verifiable Presentation
-        is sent, an additional Verifiable Presentation Request may also be sent to continue the exchange.
+        will result in either a 4xx error or one of the following - 1. one or more Verifiable Presentations
+        or 2. a Verifiable Presentation Request that conforms to the client's request. If one or more
+        Verifiable Presentations are sent, an additional Verifiable Presentation Request may also be sent
+        to continue the exchange.
       tags:
         - Credentials
       security:
@@ -1026,7 +1027,7 @@ components:
               $ref: "./components/VerifiablePresentationRequest.yml#/components/schemas/VerifiablePresentationRequest"
             referenceId:
               type: string
-              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a urn:uuid value.
+              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           required:
             - verifiablePresentation
@@ -1035,7 +1036,19 @@ components:
               $ref: "./components/VerifiablePresentation.yml#/components/schemas/VerifiablePresentation"
             referenceId:
               type: string
-              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a urn:uuid value.
+              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
+        - type: object
+          required:
+            - verifiablePresentation
+          properties:
+            verifiablePresentation:
+              type: array
+              description: The Verifiable Presentations that the client sends to the server.
+              items:
+                $ref: "./components/VerifiablePresentation.yml#/components/schemas/VerifiablePresentation"
+            referenceId:
+              type: string
+              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           required:
             - redirectUrl
@@ -1045,7 +1058,7 @@ components:
               description: A client MAY send an interaction URL to the server as a redirectUrl, inviting the server to become the client for a different related exchange starting with that interaction URL. A server MAY engage with this redirectUrl.
             referenceId:
               type: string
-              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a urn:uuid value.
+              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
     ExchangeParticipationServerMessage:
       type: object
       description: A message from the server to the client during an exchange.
@@ -1058,7 +1071,7 @@ components:
               $ref: "./components/VerifiablePresentationRequest.yml#/components/schemas/VerifiablePresentationRequest"
             referenceId:
               type: string
-              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a urn:uuid value.
+              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           required:
             - verifiablePresentation
@@ -1067,7 +1080,19 @@ components:
               $ref: "./components/VerifiablePresentation.yml#/components/schemas/VerifiablePresentation"
             referenceId:
               type: string
-              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a urn:uuid value.
+              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a <code>urn:uuid</code> value.
+        - type: object
+          required:
+            - verifiablePresentation
+          properties:
+            verifiablePresentation:
+              type: array
+              description: The Verifiable Presentations that the server sends to the client.
+              items:
+                $ref: "./components/VerifiablePresentation.yml#/components/schemas/VerifiablePresentation"
+            referenceId:
+              type: string
+              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           required:
             - redirectUrl
@@ -1077,13 +1102,13 @@ components:
               description: The URL the exchange wishes to redirect the client to.
             referenceId:
               type: string
-              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a urn:uuid value.
+              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           description: An object empty of exchange continuation properties indicating the server wishes to terminate the exchange.
           properties:
             referenceId:
               type: string
-              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message, if there is a next message to send. The value SHOULD be a urn:uuid value.
+              description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message, if there is a next message to send. The value SHOULD be a <code>urn:uuid</code> value.
           additionalProperties: false
     GetExchangeProtocolsResponse:
       type: object

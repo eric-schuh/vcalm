@@ -2281,19 +2281,24 @@ object that includes zero or more of the following properties and values:
       </p>
       <ul class="bullet">
         <li>
-`redirectUrl`: A URL that can be used to continue an interaction at another
-location. One use case for this is to send the user of an exchange client
-back to a coordinator website after an exchange has completed.
-        </li>
-        <li>
-`verifiablePresentation`: A Verifiable Presentation. This is used by either
-party in an exchange to provide information to the other party, either because
-the latter requested it or because the former is simply offering it.
+`verifiablePresentation`: A Verifiable Presentation or an array of Verifiable Presentations.
+This is used by either party in an exchange to provide information to the other party,
+either because the latter requested it or because the former is simply offering it.
         </li>
         <li>
 `verifiablePresentationRequest`: A Verifiable Presentation Request. This is
 used by either party in an exchange to request information from the other
 party.
+        </li>
+        <li>
+`redirectUrl`: A URL that can be used to continue an interaction at another
+location. One use case for this is to send the user of an exchange client
+back to a coordinator website after an exchange has completed.
+        </li>
+        <li>
+`referenceId`: An optional identifier to correlate exchange messages. A server MAY
+include this value; if present, the client SHOULD include it in its next message.
+The value SHOULD be a `urn:uuid` value.
         </li>
       </ul>
       <p>
@@ -2499,8 +2504,8 @@ mechanism.
         </pre>
 
         <p>
-A step MAY include a `verifiablePresentation` to explicitly express a
-[=verifiable presentation=] to be used in that step. This presentation could be
+A step MAY include a `verifiablePresentation` to explicitly express one or more
+[=verifiable presentation=]s to be used in that step. This presentation could be
 composed via other variables in an exchange and could be augmented with any
 additional [=verifiable credentials=] that might be issued during the step (per
 `issueRequests`). This supports use cases where specific
@@ -2808,7 +2813,7 @@ message. If the client receives a <code>referenceId</code>, it SHOULD
 include the same <code>referenceId</code> in its next message to the server.
 This aids in debugging and ensures that potentially delayed or misordered
 messages are linked to the correct request. The value of
-<code>referenceId</code> SHOULD be a <code>urn:uuid:</code> value.
+<code>referenceId</code> SHOULD be a <code>urn:uuid</code> value.
         </p>
 
         <div class="api-detail"
