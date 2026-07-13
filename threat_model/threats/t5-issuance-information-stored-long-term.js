@@ -2,7 +2,7 @@
     var threat = {
         id: "T5",
         name: "Issuance Information Stored Long-Term",
-        desc: "Private processing logs, transaction metadata, or raw PII related to credential issuance are preserved by the issuer for longer than needed, creating an unintentional honey pot that could be the target for attackers.",
+        desc: "Private processing logs, transaction metadata, or raw PII related to credential issuance are preserved by the issuer for longer than needed, creating an unintentional honey pot that could be a target for attackers.",
         response: [
             { id: "R8", name: "Data Minimization", type: "Reduce", desc: "Institute retention rules appropriate to your use case, that securely delete transaction artifacts such as Personally Identifiable Information (PII) identifiers." },
             { id: "R23", name: "Maintain Modern Operational Security", type: "Reduce", desc: "Ensure systems that have a reason to store any form of user related data have the most up to date security and surrounding policy practices." },
