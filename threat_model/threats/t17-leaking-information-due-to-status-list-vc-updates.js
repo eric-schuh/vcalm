@@ -5,7 +5,6 @@
         desc: "External observers consistently query status services to discover some information about the system issuing credentials, whether that be the rate at which they are issued, how many get issued, or in extreme cases for little used systems, what credential was issued to whom and when.",
         response: [
             { id: "R17", name: "Deterministic Batching Schedules and State Padding", type: "Reduce", desc: "Push state modifications to public status lists, on strict, standardized, scheduled intervals, and fill unallocated tracking bits with random placeholder configurations, instead of streaming real-time alerts." }
-            { id: "R22", name: "Incorporate Fake Data", type: "Reduce", desc: "Make use of random assignment of fake credentials to a status list, at random times, to obfuscate the true number of credentials that have been assigned and the rate at which credentials are being issued." }
         ],
         elements: ["E1", "C5", "P7", "F17", "P8", "F6", "F14", "P9"],
         taxonomyName: "STRIDE",
