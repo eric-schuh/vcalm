@@ -5,7 +5,7 @@ A ReSpec rendering library for threat models
 # Use 
 
 To use this library, add the library files to your repo, then add threat
-definition files, and finally and update your spec's html to use them.
+definition files, and finally update your spec's HTML to use them.
 
 ## Library Files
 
