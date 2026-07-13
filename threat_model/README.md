@@ -47,7 +47,7 @@ The threat definition files you'll want to add:
       preProcess: [window.ThreatModel.render]
    ```
 
-1. Add a link tag to bring in the threat-model.css, e.g.,
+1. Add a `link` tag to bring in the `threat-model.css`, e.g.,
 
 ```html
   <link rel="stylesheet" href="threats/threat-model.css" />
