@@ -59,8 +59,8 @@ The threat definition files you'll want to add:
 <script src="threats/outline.js"></script> 
 ```
 
-1. Finally, add script tags for each of the individual threat definition files.
-   The file names will vary for your spec, but here's the list in the example spec.
+1. Finally, add `script` tags for each of the individual threat definition files.
+   The file names will vary in your specification, but here's the list in the example.
 
 ```html
   <script src="threats/t1-imposter-websites.js"></script>
