@@ -29,7 +29,7 @@ The threat definition files you'll want to add:
 
 ## HTML updates
 
-1. Add a script tag for threat-model.js. This MUST be before the Respec Config
+1. Add a `script` tag for `threat-model.js`. This MUST be before the Respec Config
    block *and* the other Respec-Threats javascript tags.
 
 ```html
