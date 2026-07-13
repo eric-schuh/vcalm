@@ -2806,9 +2806,9 @@ links to resources from other domains to render a web page.
       <section>
         <!--If this header is changed, also update the x-componentTableLink parameter for this endpoint in the oas.yaml file.
             If the x-componentTableLink isn't updated to match the corresponding Component Table link will break.-->
-        <h4>Get Initial Exchange VPR</h4>
+        <h4>Get Current Exchange VPR</h4>
         <p>
-This endpoint MUST return the initial [=verifiable presentation request=] to be returned by an exchange
+This endpoint MUST return the current [=verifiable presentation request=] to be returned by an exchange
 when accessed with an `Accept` header value of `application/json`. Processing this
 request SHOULD not advance the exchange to a new step nor perform any
 state-changing side effects, such as credential issuance.
