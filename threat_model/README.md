@@ -11,9 +11,9 @@ definition files, and finally and update your spec's html to use them.
 
 The library files you'll want to add:
 
-1. `threats/threat-model.js` the javascript that handles parsing the threats and
+1. `threats/threat-model.js` the JavaScript that handles parsing the threats and
    rendering them in the spec.
-2. `threats/threat-model.css` the css file that handles the layout for the
+2. `threats/threat-model.css` the CSS file that handles the layout for the
    threats and table of contents. 
 
 ## Threat Definition Files
