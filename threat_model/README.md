@@ -53,7 +53,7 @@ The threat definition files you'll want to add:
   <link rel="stylesheet" href="threats/threat-model.css" />
 ```
 
-1. Add script tag for the outline.js file
+1. Add `script` tag for the `outline.js` file
 
 ```javascript
 <script src="threats/outline.js"></script> 
