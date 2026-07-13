@@ -5,8 +5,8 @@
         desc: "Private processing logs, transaction metadata, or raw PII related to credential issuance are preserved by the issuer for longer than needed, creating an unintentional honey pot that could be a target for attackers.",
         response: [
             { id: "R8", name: "Data Minimization", type: "Reduce", desc: "Institute retention rules appropriate to your use case, that securely delete transaction artifacts such as Personally Identifiable Information (PII) identifiers." },
-            { id: "R23", name: "Maintain Modern Operational Security", type: "Reduce", desc: "Ensure systems that have a reason to store any form of user related data have the most up to date security and surrounding policy practices." },
-            { id: "R24", name: "Secure Data Vaults", type: "Transfer", desc: "In the case that some user data needs to be saved for an appropriate legal reason, ensure that the data is not stored with the primary issuance software with minimal or no publicly accessible endpoints." }
+            { id: "R23", name: "Maintain Modern Operational Security", type: "Reduce", desc: "Ensure systems that have a reason to store any form of user-related data have the most up-to-date security and surrounding policy practices." },
+            { id: "R24", name: "Secure Data Vaults", type: "Transfer", desc: "If some user data needs to be saved for an appropriate legal reason, ensure that the data is not stored with the primary issuance software and has minimal or no publicly accessible endpoints." }
         ],
         elements: ["P5", "P7"],
         taxonomyName: "STRIDE",
