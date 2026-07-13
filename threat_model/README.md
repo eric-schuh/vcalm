@@ -19,7 +19,7 @@ The library files you'll want to add:
 ## Threat Definition Files
 
 The threat definition files you'll want to add:
-1. Individual threat.js files (in the threats folder in the example) as
+1. Individual `threat.js` files (in the `threats` folder in the example) as
    described in the example spec.
 2. `threats/outline.js` This defines the categories for organizing both the
    table of contents and the threat details themselves. Any number of categories
