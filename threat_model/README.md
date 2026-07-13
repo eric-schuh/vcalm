@@ -77,5 +77,5 @@ The threat definition files you'll want to add:
 
 Note: We recommend keeping the contribution directions somewhere in your
 repository, as it will help the community contribute threats to your
-specification. It need not be in the body of the spec itself, but it should be a
-good run down of what contributors need to do to help with threat modeling.
+specification. It need not be in the body of the specification itself, but it should
+be a good run down of what contributors need to do to help with threat modeling.
