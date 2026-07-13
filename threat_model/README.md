@@ -37,7 +37,7 @@ The threat definition files you'll want to add:
 ```
 
 1. Add suitable selectors for the Table of Contents and Threat Details sections
-   in the Respec Config (see example). AND add `window.ThreatModel.render` to
+   in the Respec Config (see example) _AND_ add `window.ThreatModel.render` to
    the preprocessing directive. Note that the Table of Contents section
    *MUST* have an id.
 
