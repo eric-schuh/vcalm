@@ -15,9 +15,9 @@ components:
     VerifiablePresentation:
       description: >
         A JSON-LD presentation document used where the API expects a secured
-        verifiable presentation, such as in verify operations and in
+        verifiable presentation, such as in verify operations or in
         verifiablePresentation response envelopes. The document MAY include an
-        embedded proof. An EnvelopedVerifiablePresentation MAY be used instead
+        embedded proof. An EnvelopedVerifiablePresentation MAY be used instead,
         where noted in the API description.
       allOf:
         - $ref: "./Presentation.yml#/components/schemas/PresentationDocument"
