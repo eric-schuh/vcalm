@@ -3051,8 +3051,8 @@ QR Code (optical medium), or NFC (wireless medium) &mdash; where the protocol
 does not need to involve this API.
       </p>
       <p>
-The sequence diagram below outlines an [=issuer=] generating an interaction
-URL, using a QR Code to share it with a [=holder=], and proceeding with the
+The sequence diagram below outlines an [=issuer=] generating an [=interaction
+URL=], using a QR Code to share it with a [=holder=], and proceeding with the
 `vcapi` protocol:
       </p>
       <figure>
@@ -3092,8 +3092,8 @@ An issuer-initiated interaction using a QR Code
       </figure>
 
       <p>
-The sequence diagram below outlines a [=verifier=] generating an interaction
-URL, using a QR Code to share it with a [=holder=], and proceeding with the
+The sequence diagram below outlines a [=verifier=] generating an [=interaction
+URL=], using a QR Code to share it with a [=holder=], and proceeding with the
 `vcapi` protocol:
       </p>
       <figure>
@@ -3133,7 +3133,7 @@ A verifier-initiated interaction using a QR Code
       </figure>
 
       <p>
-The sequence diagram below outlines a [=holder=] generating an interaction URL,
+The sequence diagram below outlines a [=holder=] generating an [=interaction URL=],
 using a QR Code to share it with a [=verifier=], and proceeding with the
 `inviteRequest` protocol:
       </p>
@@ -3173,9 +3173,9 @@ A holder-initiated interaction using a QR Code
         <h4>Interaction URL Format</h4>
         <p>
 The format of the <dfn>interaction URL</dfn> MUST conform to the syntax for the
-[[[URL]]] and contain an `iuv` query parameter encoding the interaction URL
+[[[URL]]] and contain an `iuv` query parameter encoding the [=interaction URL=]
 version number, which MUST be `1` when using this version of this API. The
-interaction URL SHOULD be an HTTPS URL that contains an interaction-specific
+[=interaction URL=] SHOULD be an HTTPS URL that contains an interaction-specific
 identifier. The URL SHOULD be opaque and require no URL syntax processing before
 it is fetched by the receiving system. An example of such a URL is shown below:
         </p>
@@ -3189,16 +3189,16 @@ Protocols that encode lengthy protocol-specific information into URLs suffer
 from limitations placed by software libraries on the maximum allowable length of a URL.
 At the time of writing, the suggested URL length limit is roughly 2,000
 characters. Implementers SHOULD NOT put information that can be expressed in the
-response to a GET request for an interaction URL, defined in Section
+response to a GET request for an [=interaction URL=], defined in Section
 [[[#interaction-protocols-response]]], into the query parameters of the
-interaction URL.
+[=interaction URL=].
         </p>
       </section>
 
         <p class="note" title="Interactions URL lives on Coordinators, not Workflow Services">
-A coordinator has the freedom to put the interaction URL at any location on its Web origin, because
+A coordinator has the freedom to put the [=interaction URL=] at any location on its Web origin, because
 it is expected to be considered opaque by consuming software (except for the `iuv` query parameter).
-However, it is important that the interaction URL be hosted on a coordinator and NOT hosted at the
+However, it is important that the [=interaction URL=] be hosted on a coordinator and NOT hosted at the
 workflow service. This enables the coordinator's Web origin (DNS domain name) to be used as a consistent trust signal by
 consumers and the application of business rules that might modulate actions.
 
@@ -3315,7 +3315,7 @@ the `saas.example` domain in the list of protocols.
         <p>
 When the [=interaction URL=] is fetched using any unrecognized `Accept` header,
 a `text/html` document MUST be returned with directions instructing a human
-being to use specific software that understands how to process interaction URLs.
+being to use specific software that understands how to process [=interaction URL=]s.
         </p>
 
         <p class="note" title="Mapping to exchange URLs">
@@ -3323,7 +3323,7 @@ Some coordinator implementations will implement the protocols endpoint as a pass
 through to a protocols endpoint for an exchange instance. For example, a GET on
 `https://app.example/interactions/z8n38Dp7a?iuv=1` will result in a pass-through
 GET on `https://app.example/workflows/123/exchanges/987/protocols`, which would
-return the response above. Implementing interaction URLs in this way can
+return the response above. Implementing [=interaction URL=]s in this way can
 provide an easier implementation path.
         </p>
 
@@ -3683,7 +3683,7 @@ accident, as it might include information that is secret to the [=holder=].
       <h3>Use of HTTPS for Interaction URLs</h3>
 
       <p>
-This specification strongly suggests the use of HTTPS for interaction URLs
+This specification strongly suggests the use of HTTPS for [=interaction URL=]s
 for the following reasons:
       </p>
 

@@ -1103,7 +1103,7 @@ components:
           properties:
             redirectUrl:
               type: string
-              description: The URL the exchange wishes to redirect the client to.
+              description: The URL the exchange wishes to redirect the client to. A server MAY also send an interaction URL to the client as a redirectUrl, inviting the client to automatically initiate another exchange. In this case, a client that understands interaction URLs MAY retrieve the protocols associated with the interaction URL and start the exchange. A client that does not understand interaction URLs MAY direct the holder to the redirectUrl in the browser, where an HTML page MAY display next steps.
             referenceId:
               type: string
               description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a <code>urn:uuid</code> value.
