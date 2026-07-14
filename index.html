@@ -3061,6 +3061,9 @@ sequenceDiagram
   autonumber
   H->>B: Click "Receive credential"
   B->>I: Request interaction QR Code
+  I->>WS: Create workflow exchange
+  Note left of WS: POST https://workflow.example/workflows/abc/exchanges
+  WS->>I: Return workflow exchange
   I->>I: Generate QR Code
   I->>B: Display QR Code
   Note left of I: https://issuer.example/interactions/123?iuv=1
@@ -3098,6 +3101,9 @@ sequenceDiagram
   autonumber
   H->>B: Click "Share credential"
   B->>V: Request interaction QR Code
+  V->>WS: Create workflow exchange
+  Note left of WS: POST https://workflow.example/workflows/abc/exchanges
+  WS->>V: Return workflow exchange
   V->>V: Generate QR Code
   V->>B: Display QR Code
   Note left of V: https://verifier.example/interactions/123?iuv=1
