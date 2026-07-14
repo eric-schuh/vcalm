@@ -3076,6 +3076,7 @@ sequenceDiagram
   W->>W: Select appropriate protocol
   opt "vcapi" protocol example
   W->>WS: Initiate workflow exchange
+  Note left of I: POST https://workflow.example/workflows/abc/exchanges/123
   W->>H: Acquire consent to proceed
   Note right of H: issuer.example is offering credentials, accept?
   end
@@ -3118,6 +3119,7 @@ sequenceDiagram
   W->>W: Select appropriate protocol
   opt "vcapi" protocol example
   W->>WS: Initiate workflow exchange
+  Note left of V: POST https://workflow.example/workflows/abc/exchanges/123
   end
         </pre>
         <figcaption>
