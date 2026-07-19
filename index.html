@@ -3371,6 +3371,62 @@ a `text/html` document MUST be returned with directions instructing a human
 being to use specific software that understands how to process [=interaction URLs=].
         </p>
 
+        <p>
+Below is a registry of interaction protocols that are supported today.
+There is broad interest in extracting this registry into a separate
+document as a dependency of this specification. The reasoning behind
+this interest is that the idea of a generic, extensible, reference
+of credential management protocols has a natural appeal across various
+communities and use cases. In the event that this migration occurs,
+implementaters SHOULD use that reference as the authoritative guide
+for protocol usage. In the event that there is a conflict between the
+registry listed below and the external registry, implementers SHOULD
+be aware of versioning differences of this specification and proceed
+with caution.
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>`inviteRequest`</td>
+              <td>
+The `inviteRequest` interaction protocol is used by a local system to signal to
+the remote system that it would like an invitation to a remote system via a
+specific URL, such as a website where an individual can engage in a use-case
+specific interaction. More details are provided in Section [[[#inviterequest-interaction-protocol]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`vcapi`</td>
+              <td>
+The `vcapi` interaction protocol is used to initiate a specific [=exchange=]
+as described in Section [[[#participate-in-an-exchange]]].
+More details are provided in Section [[[#vcapi-interaction-protocol]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`OID4VCI`</td>
+              <td>
+The `OID4VCI` interaction protocol is used to initiate a credential issuance
+flow in accordance with the latest version of [[OID4VCI]].
+              </td>
+            </tr>
+            <tr>
+              <td>`OID4VP`</td>
+              <td>
+The `OID4VP` interaction protocol is used to initiate a credential presentation
+flow in accordance with the latest version of [[OID4VP]].
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
         <p class="note" title="Mapping to exchange URLs">
 Some coordinator implementations will implement the protocols endpoint as a pass
 through to a protocols endpoint for an exchange instance. For example, a GET on
