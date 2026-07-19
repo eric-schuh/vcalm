@@ -349,7 +349,7 @@ paths:
           description: Internal Error
   /workflows/{localWorkflowId}/exchanges/{localExchangeId}/request:
     get:
-      summary: Gets the current VPR for a specific exchange.
+      summary: Gets the current VPR for an exchange.
       tags:
         - Exchanges
       security:
@@ -357,7 +357,7 @@ paths:
         - oAuth2: []
         - zCap: []
       operationId: getCurrentExchangeVpr
-      description: Gets the current VPR for a specific exchange. This might be a useful endpoint for integration with the DC API. Processing this request SHOULD not advance the exchange to a new step nor perform any state-changing side effects, such as credential issuance.
+      description: Gets the current VPR for an exchange. This might be a useful endpoint for integration with the DC API. Processing this request SHOULD not advance the exchange to a new step nor perform any state-changing side effects, such as credential issuance.
       x-expectedCaller: Anyone with provided URL
       x-componentTableLink: "get-current-exchange-vpr"
       parameters:
@@ -369,7 +369,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./components/VerifiablePresentationRequest.yml#/components/schemas/VerifiablePresentationRequest"
+                $ref: "#/components/schemas/GetCurrentExchangeVprResponse"
         "500":
           description: Internal Error
   /credentials/{id}:
@@ -1153,6 +1153,13 @@ components:
             OID4VCI:
               type: string
               description: The URL to use when initiating an OID4VCI issuance.
+    GetCurrentExchangeVprResponse:
+      type: object
+      additionalProperties: false
+      description: The current VPR for an exchange.
+      properties:
+        verifiablePresentationRequest:
+          $ref: "./components/VerifiablePresentationRequest.yml#/components/schemas/VerifiablePresentationRequest"
     GetExchangeResponse:
       type: object
       additionalProperties: false
