@@ -2810,7 +2810,7 @@ links to resources from other domains to render a web page.
         <p>
 This endpoint MUST return the current [=verifiable presentation request=] to be returned by an exchange
 when accessed with an `Accept` header value of `application/json`. Processing this
-request SHOULD not advance the exchange to a new step nor perform any
+request SHOULD NOT advance the exchange to a new step nor perform any
 state-changing side effects, such as credential issuance.
         </p>
 
@@ -2827,7 +2827,7 @@ and perform an HTTP GET on the `vcapi` URL concatenated with `/request`.
 
         <p>
 This feature allows the browser to route their requests through the
-[=coordinator=]'s origin (thereby anchoring the entire operation in said origin)
+[=coordinator=]'s origin (thereby anchoring the entire operation in said origin),
 through to the delegate they have approved as a service provider.
 This convenience exists whether the request is made on the same device or
 forwarded for a cross-device request.
@@ -2835,7 +2835,7 @@ forwarded for a cross-device request.
 
         <p>
 Finally, this endpoint operates without the need for signed requests, as it MAY
-rely on TLS and existing CA infrastructure, without the need for new certificates
+rely on TLS and existing CA infrastructure, without a need for new certificates
 nor a need to incorporate those into the exchange protocol in an additive way.
 However, if we find that the [[DCAPI]] or other supported protocols require
 signed requests or encrypted responses, then the request MAY be returned as a
