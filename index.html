@@ -53,6 +53,12 @@
         status: "Published",
         publisher: "ISO"
       },
+      "DIDCOMM": {
+        title: "DIDComm Messaging",
+        href: "https://identity.foundation/didcomm-messaging/spec/",
+        status: "Editor's Draft",
+        publisher: "DIF"
+      },
       "ZCAP": {
         title: "Authorization Capabilities for Linked Data v0.3",
         href: "https://w3c-ccg.github.io/zcap-spec/",
@@ -2234,7 +2240,7 @@ code, or a universal link.
 Exchanges are designed to be executable using other protocols in
 addition to this API exchange protocol; for example, an exchange could
 potentially be executable with any of the [[OPENID4VCI]], [[OPENID4VP]],
-DIDComm, and exchange protocols. The protocols supported depend on the
+[[DIDCOMM]], and exchange protocols. The protocols supported depend on the
 complexity of the workflow the exchange is based on, and the options provided
 by the coordinator when the exchange was created.
       </p>
@@ -2248,7 +2254,7 @@ credential offer, or as the `client_id` of an [[OPENID4VP]] authorization reques
 indicating that [[OPENID4VCI]] or [[OPENID4VP]], respectively, ought to be used. This section
 focuses on how an exchange client uses this API to interact with the exchange; see
 Section [[[#interaction-protocols-response]]] to see how to combine exchanges
-with other protocols such as [[OPENID4VCI]], [[OPENID4VP]], and DIDComm.
+with other protocols such as [[OPENID4VCI]], [[OPENID4VP]], and [[DIDCOMM]].
       </p>
       <p>
 Exchanges that are executed using this API protocol involve messages sent as
