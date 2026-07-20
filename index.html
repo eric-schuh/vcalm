@@ -53,24 +53,6 @@
         status: "Published",
         publisher: "ISO"
       },
-      "DCAPI": {
-        title: "Digital Credential API",
-        href: "https://www.w3.org/TR/digital-credentials/",
-        status: "WD",
-        publisher: "W3C"
-      },
-      "OID4VCI": {
-        title: "OpenID for Verifiable Credential Issuance v1.0",
-        href: "https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html",
-        status: "WD",
-        publisher: "OpenID Foundation"
-      },
-      "OID4VP": {
-        title: "OpenID for Verifiable Presentations v1.0",
-        href: "https://openid.net/specs/openid-4-verifiable-presentations-1_0.html",
-        status: "WD",
-        publisher: "OpenID Foundation"
-      },
       "ZCAP": {
         title: "Authorization Capabilities for Linked Data v0.3",
         href: "https://w3c-ccg.github.io/zcap-spec/",
@@ -2251,22 +2233,22 @@ code, or a universal link.
       <p>
 Exchanges are designed to be executable using other protocols in
 addition to this API exchange protocol; for example, an exchange could
-potentially be executable with any of the OID4VCI, OID4VP, DIDComm, and
-exchange protocols. The protocols supported depend on the complexity
-of the workflow the exchange is based on, and the options provided by the
-coordinator when the exchange was created.
+potentially be executable with any of the [[OPENID4VCI]], [[OPENID4VP]],
+DIDComm, and exchange protocols. The protocols supported depend on the
+complexity of the workflow the exchange is based on, and the options provided
+by the coordinator when the exchange was created.
       </p>
       <p>
 The exchange client is expected to initiate the exchange using a protocol that
 is compatible with how the client received the exchange URL. For example, the
 exchange URL could have been provided over CHAPI with a protocol identifier
 indicating that this API protocol ought to be used. Alternatively, the
-exchange URL could be included as the `credential_issuer` in an OID4VCI
-credential offer, or as the `client_id` of an OID4VP authorization request,
-indicating that OID4VCI or OID4VP, respectively, ought to be used. This section
+exchange URL could be included as the `credential_issuer` in an [[OPENID4VCI]]
+credential offer, or as the `client_id` of an [[OPENID4VP]] authorization request,
+indicating that [[OPENID4VCI]] or [[OPENID4VP]], respectively, ought to be used. This section
 focuses on how an exchange client uses this API to interact with the exchange; see
 Section [[[#interaction-protocols-response]]] to see how to combine exchanges
-with other protocols such as OID4VCI, OID4VP, and DIDComm.
+with other protocols such as [[OPENID4VCI]], [[OPENID4VP]], and DIDComm.
       </p>
       <p>
 Exchanges that are executed using this API protocol involve messages sent as
@@ -2611,7 +2593,7 @@ referenced in the `didAuthRequest` step):
         <p>
 For the `openId` options, specifically the values
 `createAuthorizationRequest` and `authorizationRequest`, the example below is
-provided to help developers understand what an OID4VP Authorization Request
+provided to help developers understand what an [[OPENID4VP]] Authorization Request
 looks like:
         </p>
 
@@ -4672,8 +4654,8 @@ The lifecycle of a [=verifiable credential=] includes the creation of a
 status management, local credential administration, presentation, verification, and validation. This
 specification defines an HTTP-based API for [=verifiable credential=] lifecycle
 management that can be used by [=issuers=], [=holders=], and [=verifiers=].
-There are other specifications, such as the [[[DCAPI]]], [[[OID4VCI]]], and
-[[[OID4VP]]] that might seem to provide similar functionality to this
+There are other specifications, such as [[[digital-credentials]]], [[[OPENID4VCI]]], and
+[[[OPENID4VP]]] that might seem to provide similar functionality to this
 specification. This section explains what other specifications have been
 considered before the standardization of this specification, and how this
 specification differs from other specifications in the ecosystem.
@@ -4686,7 +4668,7 @@ credential format, credential query language, and credential delivery protocol. 
 credential format that is expressible as a [=verifiable credential=] or an
 <a data-cite="VC-DATA-MODEL-2.0#enveloped-verifiable-credentials">enveloped
 verifiable credential</a> can be used with this specification. Similarly,
-credential delivery protocols such as [[[OID4VCI]]] or [[[OID4VP]]] can be used
+credential delivery protocols such as [[[OPENID4VCI]]] or [[[OPENID4VP]]] can be used
 in [=interactions=] and [=exchanges=] defined by this specification. Finally,
 this specification supports multiple credential query languages to provide for
 flexibility as technologies improve and market verticals specialize.
