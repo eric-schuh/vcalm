@@ -4484,7 +4484,8 @@ and contains a `callbackUrl` to demonstrate the callback feature.
 
     <h3>Issuance of a VC to a requesting holder</h3>
     <p>
-      The below example details a [=holder=] requesting the issuance of a [=verifiable credential=] from an [=issuer=].
+      The following example details a [=holder=] requesting the issuance of a
+      [=verifiable credential=] from an [=issuer=].
     </p>
 
     <figure>
@@ -4532,11 +4533,13 @@ Issuance of a credential to the requesting holder.
 
     <h3>Verification of a single VC</h3>
     <p>
-      The following diagram details the verification of a single [=verifiable credential=] at the request of a [=holder=].
-      It shows the use of the GET /credentials/{id} with the [=holder coordinator=] doing the work of generating the 
-      [=verifiable presentation=] that is sent to the [=verifier=]. The [=workflow=] shown here does not have the verifier
-      doing any auth request as seen in the issuance example above. If the [=verifier=] wanted they could do another back
-      and forth with the [=holder=] before deciding to verify the provided [=verifiable presentation=].
+      The following diagram details verification of a single [=verifiable credential=]
+      upon request by a [=holder=]. `GET /credentials/{id}` is used, with the [=holder
+      coordinator=] doing the work of generating the [=verifiable presentation=] that
+      is then sent to the [=verifier=]. In contrast to the preceding issuance example,
+      the verifier does not make any auth request in this [=workflow=]. If the
+      [=verifier=] wanted, they could do another back-and-forth with the [=holder=]
+      before deciding to verify the provided [=verifiable presentation=].
     </p>
     <figure>
         <pre class="mermaid" style="max-width:100%">
@@ -4575,11 +4578,13 @@ Verification of a single credential.
 
     <h3>Verification of a multiple VCs</h3>
     <p>
-      The following diagram details the verification of multiple [=verifiable credential=] at the request of a [=holder=].
-      It shows the use of the POST /presentations to create the [=verifiable presentation=], with the [=holder service=] 
-      doing the work of generating the [=verifiable presentation=] that is sent to the [=verifier=]. 
-      The [=workflow=] shown here does not have the verifier doing any auth request as seen in the issuance example above. 
-      If the [=verifier=] wanted they could do another back and forth with the [=holder=] before deciding to verify the provided [=verifiable presentation=].
+      The following diagram details the verification of multiple [=verifiable credential=]
+      at the request of a [=holder=]. It shows the use of the POST /presentations to create the
+      [=verifiable presentation=], with the [=holder service=]  doing the work of generating
+      the [=verifiable presentation=] that is sent to the [=verifier=]. The [=workflow=]
+      shown here does not have the verifier doing any auth request as seen in the issuance example 
+      above. If the [=verifier=] wanted they could do another back and forth with the [=holder=]
+      before deciding to verify the provided [=verifiable presentation=].
     </p>
     <figure>
         <pre class="mermaid" style="max-width:100%">
@@ -4617,10 +4622,10 @@ Verification of multiple credentials in one presentation.
 
     <h3>Presentation of a VC in person</h3>
     <p>
-      The following diagram details the presentation of a [=verifiable credential=] at the request of a [=holder=] to 
-      another person, Alice. It shows the use of the GET /presentations/{id} implying that the [=holder=] has 
-      presented this same credential in the past, and the [=holder coordinator=] knows the id to request the existing
-      presentation. 
+      The following diagram details the presentation of a [=verifiable credential=] at the
+      request of a [=holder=] to another person, Alice, who might be a [=verifier=] or
+      another [=holder=]. The presenting [=holder=] uses `GET /presentations/{id}`, 
+      which implies that this [=holder=] has presented this same credential in the past, and the [=holder coordinator=] knows the id to request the existing presentation.
     </p>
     <figure>
         <pre class="mermaid" style="max-width:100%">
