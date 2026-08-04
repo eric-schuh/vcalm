@@ -357,7 +357,7 @@ paths:
         - oAuth2: []
         - zCap: []
       operationId: getCurrentExchangeVpr
-      description: Gets the current VPR for an exchange. This might be a useful endpoint for integration with the DC API. Processing this request SHOULD not advance the exchange to a new step nor perform any state-changing side effects, such as credential issuance.
+      description: Gets the current VPR for an exchange (if available). This might be a useful endpoint for integration with the DC API. Processing this request SHOULD not advance the exchange to a new step nor perform any state-changing side effects, such as credential issuance.
       x-expectedCaller: Anyone with provided URL
       x-componentTableLink: "get-current-exchange-vpr"
       parameters:

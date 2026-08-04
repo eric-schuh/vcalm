@@ -2811,7 +2811,9 @@ links to resources from other domains to render a web page.
 This endpoint MUST return the current [=verifiable presentation request=] to be returned by an exchange
 when accessed with an `Accept` header value of `application/json`. Processing this
 request SHOULD NOT advance the exchange to a new step nor perform any
-state-changing side effects, such as credential issuance.
+state-changing side effects, such as credential issuance. If there is no [=verifiable presentation request=]
+available for the exchange in the current step, the value of the `verifiablePresentationRequest` property
+returned by this endpoint MUST be an empty JSON object.
         </p>
 
         <div class="api-detail"
