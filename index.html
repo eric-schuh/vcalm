@@ -3421,33 +3421,41 @@ More details can be found in Section [[[#vcapi-interaction-protocol]]].
             <tr>
               <td>`OID4VCI`</td>
               <td>
+                <p>
 The `OID4VCI` interaction protocol is used to initiate a credential issuance
 flow in accordance with the latest version of [[OPENID4VCI]].
 The value of this entry should be the Authorization Endpoint, against which
 the wallet should perform an Authorization Request for the exchange.
-More details can be found in [[[OPENID4VCI]]]. Implementers should be aware of
-the drift that has occurred with this specification and the impact that this
-has made on the semantics of this property. Specifically, due to the material
-differences between popular draft versions and the stable 1.0 version, it is
-difficult for a wallet to know how to process an inbound request without
-coordination in advance. As a result of this, implementers should consider
-using the versioned variant of this property as described in the protocol versioning note below.
+More details can be found in [[[OPENID4VCI]]].
+                </p>
+                <p>
+Implementers should be aware of the drift that has occurred with this specification
+and the impact that this has made on the semantics of this property.
+Specifically, due to the material differences between popular draft versions and the
+stable 1.0 version, it is difficult for a wallet to know how to process an inbound request
+without coordination in advance. As a result of this, implementers should consider using
+the versioned variant of this property as described in the protocol versioning note below.
+                </p>
               </td>
             </tr>
             <tr>
               <td>`OID4VP`</td>
               <td>
+                <p>
 The `OID4VP` interaction protocol is used to initiate a credential presentation
 flow in accordance with the latest version of [[OPENID4VP]].
 The value of this entry should be the Authorization Endpoint, against which
 the wallet should perform an Authorization Request for the exchange.
-More details can be found in [[[OPENID4VP]]]. Implementers should be aware of
-the drift that has occurred with this specification and the impact that this
-has made on the semantics of this property. Specifically, due to the material
-differences between popular draft versions and the stable 1.0 version, it is
-difficult for a wallet to know how to process an inbound request without
-coordination in advance. As a result of this, implementers might consider
-using the versioned variant of this property as described in the protocol versioning note below.
+More details can be found in [[[OPENID4VP]]].
+                </p>
+                <p>
+Implementers should be aware of the drift that has occurred with this specification
+and the impact that this has made on the semantics of this property.
+Specifically, due to the material differences between popular draft versions and the
+stable 1.0 version, it is difficult for a wallet to know how to process an inbound request
+without coordination in advance. As a result of this, implementers might consider using
+the versioned variant of this property as described in the protocol versioning note below.
+                </p>
               </td>
             </tr>
             <tr>
