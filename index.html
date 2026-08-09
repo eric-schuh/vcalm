@@ -3230,7 +3230,8 @@ An interaction QR code for `https://app.example/interactions/z8n38Dp7a?iuv=1`
         <p>
 It can be useful to invoke an application that is capable of processing an
 [=interaction URL=]. This section defines an `interaction:` protocol scheme
-format for this purpose. The format of the protocol scheme MUST conform to
+format (for native apps) and a `web+interaction:` protocol scheme format
+(for web apps) for this purpose. The format of the protocol scheme MUST conform to
 the following syntax:
         </p>
 
@@ -3246,7 +3247,7 @@ the following syntax:
             <tr>
               <td>
                 <pre class="nohighlight">
-  scheme          = "interaction:" interaction-url
+  scheme          = ("interaction:" / "web+interaction:") interaction-url
   interaction-url = <a href="https://url.spec.whatwg.org/#concept-url">URL</a>
                 </pre>
               </td>
@@ -3260,8 +3261,12 @@ the following syntax:
   <a href="#interaction-protocols-response">interaction protocols response</a>.
         </p>
 
-        <pre class="example nohighlight" title="An example of an interaction scheme URL">
+        <pre class="example nohighlight" title="An example of a native interaction scheme URL">
   interaction:https://app.example/interactions/z8n38Dp7a?iuv=1
+        </pre>
+
+        <pre class="example nohighlight" title="An example of a web interaction scheme URL">
+  web+interaction:https://app.example/interactions/z8n38Dp7a?iuv=1
         </pre>
 
       </section>
