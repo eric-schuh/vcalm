@@ -3429,11 +3429,11 @@ the wallet should perform an Authorization Request for the exchange.
 More details can be found in [[[OPENID4VCI]]].
                 </p>
                 <p>
-Implementers should be aware of the drift that has occurred with this specification
+Implementers are advised to understand the drift that has occurred with this specification
 and the impact that this has made on the semantics of this property.
 Specifically, due to the material differences between popular draft versions and the
 stable 1.0 version, it is difficult for a wallet to know how to process an inbound request
-without coordination in advance. As a result of this, implementers should consider using
+without coordination in advance. As a result of this, implementers are advised to use
 the versioned variant of this property as described in the protocol versioning note below.
                 </p>
               </td>
@@ -3449,11 +3449,11 @@ the wallet should perform an Authorization Request for the exchange.
 More details can be found in [[[OPENID4VP]]].
                 </p>
                 <p>
-Implementers should be aware of the drift that has occurred with this specification
+Implementers are advised to understand the drift that has occurred with this specification
 and the impact that this has made on the semantics of this property.
 Specifically, due to the material differences between popular draft versions and the
 stable 1.0 version, it is difficult for a wallet to know how to process an inbound request
-without coordination in advance. As a result of this, implementers might consider using
+without coordination in advance. As a result of this, implementers are advised to use
 the versioned variant of this property as described in the protocol versioning note below.
                 </p>
               </td>
@@ -3475,7 +3475,8 @@ In order to remove ambiguity around the version of a protocol that
 an exchange supports, implementers might consider adding information
 to the protocol properties. One way to do this would be to use the
 pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `OID4VP`,
-they could use `OID4VP-draft28` or `OID4VP-1.0`.
+they could use `OID4VP-draft28` or `OID4VP-1.0`. However, in the case of
+`OID4VCI` and `OID4VP`, implementers SHOULD use `OID4VCI-1.0` and `OID4VP-1.0` respectively.
         </p>
 
         <p class="note" title="Mapping to exchange URLs">
