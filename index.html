@@ -77,6 +77,12 @@
         status: "WD",
         publisher: "W3C"
       },
+      "DIDCOMM": {
+        title: "DIDComm Messaging",
+        href: "https://identity.foundation/didcomm-messaging/spec/",
+        status: "Editor's Draft",
+        publisher: "DIF"
+      },
       "ZCAP": {
         title: "Authorization Capabilities for Linked Data v0.3",
         href: "https://w3c-ccg.github.io/zcap-spec/",
@@ -3397,9 +3403,10 @@ with caution.
               <td>`inviteRequest`</td>
               <td>
 The `inviteRequest` interaction protocol is used by a local system to signal to
-the remote system that it would like an invitation to a remote system via a
-specific URL, such as a website where an individual can engage in a use-case
-specific interaction. More details are provided in Section [[[#inviterequest-interaction-protocol]]].
+the remote system that it would like an invitation to a remote system.
+The value of this entry should be the URL of a website where an individual can
+engage in a use-case-specific interaction.
+More details can be found in Section [[[#inviterequest-interaction-protocol]]].
               </td>
             </tr>
             <tr>
@@ -3407,7 +3414,8 @@ specific interaction. More details are provided in Section [[[#inviterequest-int
               <td>
 The `vcapi` interaction protocol is used to initiate a specific [=exchange=]
 as described in Section [[[#participate-in-an-exchange]]].
-More details are provided in Section [[[#vcapi-interaction-protocol]]].
+The value of this entry should be the fully-qualified URL used as the ID for the exchange.
+More details can be found in Section [[[#vcapi-interaction-protocol]]].
               </td>
             </tr>
             <tr>
@@ -3415,6 +3423,15 @@ More details are provided in Section [[[#vcapi-interaction-protocol]]].
               <td>
 The `OID4VCI` interaction protocol is used to initiate a credential issuance
 flow in accordance with the latest version of [[OPENID4VCI]].
+The value of this entry should be the Authorization Endpoint, against which
+the wallet should perform an Authorization Request for the exchange.
+More details can be found in [[[OPENID4VCI]]]. Implementers should be aware of
+the drift that has occurred with this specification and the impact that this
+has made on the semantics of this property. Specifically, due to the material
+differences between popular draft versions and the stable 1.0 version, it is
+difficult for a wallet to know how to process an inbound request without
+coordination in advance. As a result of this, implementers should consider
+using the versioned variant of this property as described in the protocol versioning note below.
               </td>
             </tr>
             <tr>
@@ -3422,10 +3439,36 @@ flow in accordance with the latest version of [[OPENID4VCI]].
               <td>
 The `OID4VP` interaction protocol is used to initiate a credential presentation
 flow in accordance with the latest version of [[OPENID4VP]].
+The value of this entry should be the Authorization Endpoint, against which
+the wallet should perform an Authorization Request for the exchange.
+More details can be found in [[[OPENID4VP]]]. Implementers should be aware of
+the drift that has occurred with this specification and the impact that this
+has made on the semantics of this property. Specifically, due to the material
+differences between popular draft versions and the stable 1.0 version, it is
+difficult for a wallet to know how to process an inbound request without
+coordination in advance. As a result of this, implementers might consider
+using the versioned variant of this property as described in the protocol versioning note below.
+              </td>
+            </tr>
+            <tr>
+              <td>`didcomm`</td>
+              <td>
+The `didcomm` interaction protocol is used to initiate a credential presentation
+flow in accordance with the latest version of [[DIDCOMM]].
+The value of this entry should be the Out-of-Band (OOB) Invitation URL for the exchange.
+More details can be found in [[[DIDCOMM]]].
               </td>
             </tr>
           </tbody>
         </table>
+
+        <p class="note" title="Versioning exchange protocols">
+In order to remove ambiguity around the version of a protocol that
+an exchange supports, implementers might consider adding information
+to the protocol properties. One way to do this would be to use the
+pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `OID4VP`,
+they could use `OID4VP-draft28` or `OID4VP-1.0`.
+        </p>
 
         <p class="note" title="Mapping to exchange URLs">
 Some coordinator implementations will implement the protocols endpoint as a pass
