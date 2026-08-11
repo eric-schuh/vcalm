@@ -3349,7 +3349,7 @@ result in either of the following responses:
   "protocols": {
     "inviteRequest": "https://saas.example/workflows/123/exchanges/987/invite-request/response",
     "vcapi": "https://saas.example/workflows/123/exchanges/987",
-    "OID4VP": "openid4vp://?client_id=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Fresponse&request_uri=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Frequest'"
+    "oid4vp-1.0": "openid4vp://?client_id=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Fresponse&request_uri=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Frequest'"
   }
 }
         </pre>
@@ -3400,6 +3400,16 @@ with caution.
           </thead>
           <tbody>
             <tr>
+              <td>`interact`</td>
+              <td>
+The `interact` interaction protocol is used to redirect a wallet to a
+different interaction URL, where the exchange will continue.
+This protocol can be used by exchanges as a delegation mechanism.
+The value of this entry should be an interaction URL.
+More details can be found in Section [[[#interaction-url-format]]].
+              </td>
+            </tr>
+            <tr>
               <td>`inviteRequest`</td>
               <td>
 The `inviteRequest` interaction protocol is used by a local system to signal to
@@ -3419,10 +3429,10 @@ More details can be found in Section [[[#vcapi-interaction-protocol]]].
               </td>
             </tr>
             <tr>
-              <td>`OID4VCI`</td>
+              <td>`oid4vci`</td>
               <td>
                 <p>
-The `OID4VCI` interaction protocol is used to initiate a credential issuance
+The `oid4vci` interaction protocol is used to initiate a credential issuance
 flow in accordance with the latest version of [[OPENID4VCI]].
 The value of this entry should be the Authorization Endpoint, against which
 the wallet should perform an Authorization Request for the exchange.
@@ -3439,10 +3449,10 @@ the versioned variant of this property as described in the protocol versioning n
               </td>
             </tr>
             <tr>
-              <td>`OID4VP`</td>
+              <td>`oid4vp`</td>
               <td>
                 <p>
-The `OID4VP` interaction protocol is used to initiate a credential presentation
+The `oid4vp` interaction protocol is used to initiate a credential presentation
 flow in accordance with the latest version of [[OPENID4VP]].
 The value of this entry should be the Authorization Endpoint, against which
 the wallet should perform an Authorization Request for the exchange.
@@ -3467,6 +3477,30 @@ The value of this entry should be the Out-of-Band (OOB) Invitation URL for the e
 More details can be found in [[[DIDCOMM]]].
               </td>
             </tr>
+            <tr>
+              <td>`OID4VCI`</td>
+              <td>
+                <p>
+A deprecated version of the newer `oid4vci` interaction protocol property
+that is indifinitely retained here for backwards compatibility.
+Implementers are advised to use the `oid4vci` property for OID4VCI exchanges
+and allow for a reasonable transition period during which they interpret
+`OID4VCI` from peer systems as `oid4vci`.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>`OID4VP`</td>
+              <td>
+                <p>
+A deprecated version of the newer `oid4vp` interaction protocol property
+that is indifinitely retained here for backwards compatibility.
+Implementers are advised to use the `oid4vp` property for OID4VP exchanges
+and allow for a reasonable transition period during which they interpret
+`OID4VP` from peer systems as `oid4vp`.
+                </p>
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -3474,9 +3508,9 @@ More details can be found in [[[DIDCOMM]]].
 In order to remove ambiguity around the protocol versions that
 an exchange supports, implementers might consider adding information
 to the protocol properties. One way to do this would be to use the
-pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `OID4VP`,
-they could use `OID4VP-draft28` or `OID4VP-1.0`. However, in the case of
-`OID4VCI` and `OID4VP`, implementers SHOULD use `OID4VCI-1.0` and `OID4VP-1.0` respectively.
+pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `oid4vp`/`OID4VP`,
+they could use `oid4vp-draft28` or `oid4vp-1.0`. However, in the case of
+`oid4vci`/`OID4VCI` and `oid4vp`/`OID4VP`, implementers SHOULD use `oid4vci-1.0` and `oid4vp-1.0` respectively.
         </p>
 
         <p class="note" title="Mapping to exchange URLs">

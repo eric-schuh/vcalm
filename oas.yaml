@@ -1143,16 +1143,22 @@ components:
           properties:
             interact:
               type: string
-              description: A URL that can be used during exchange flows with a human in the loop. See the section on the <a href="#dfn-interaction-url">interact URL format</a> for more details.
+              description: A different interaction URL to which a wallet should be redirected to continue the exchange. See the section on the <a href="#dfn-interaction-url">interaction URL format</a> for more details.
+            inviteRequest:
+              type: string
+              description: The URL of a website where an individual can engage in a use-case-specific interaction. See the section on the <a href="#inviterequest-interaction-protocol">inviteRequest</a> for more details.
             vcapi:
               type: string
               description: The URL to use when initiating a VCALM exchange.
-            OID4VP:
+            didcomm:
               type: string
-              description: The URL to use when initiating an OID4VP presentation.
+              description: The URL to use when initiating a DIDComm exchange.
             OID4VCI:
               type: string
-              description: The URL to use when initiating an OID4VCI issuance.
+              description: A deprecated version of <code>oid4vci</code>.
+            OID4VP:
+              type: string
+              description: A deprecated version of <code>oid4vp</code>.
     GetCurrentExchangeVprResponse:
       type: object
       additionalProperties: false
