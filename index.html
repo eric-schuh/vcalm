@@ -3315,7 +3315,7 @@ the `saas.example` domain in the list of protocols.
         <p>
 When the [=interaction URL=] is fetched using any unrecognized `Accept` header,
 a `text/html` document MUST be returned with directions instructing a human
-being to use specific software that understands how to process [=interaction URL=]s.
+being to use specific software that understands how to process [=interaction URLs=].
         </p>
 
         <p class="note" title="Mapping to exchange URLs">
@@ -3323,7 +3323,7 @@ Some coordinator implementations will implement the protocols endpoint as a pass
 through to a protocols endpoint for an exchange instance. For example, a GET on
 `https://app.example/interactions/z8n38Dp7a?iuv=1` will result in a pass-through
 GET on `https://app.example/workflows/123/exchanges/987/protocols`, which would
-return the response above. Implementing [=interaction URL=]s in this way can
+return the response above. Implementing [=interaction URLs=] in this way can
 provide an easier implementation path.
         </p>
 
@@ -3683,7 +3683,7 @@ accident, as it might include information that is secret to the [=holder=].
       <h3>Use of HTTPS for Interaction URLs</h3>
 
       <p>
-This specification strongly suggests the use of HTTPS for [=interaction URL=]s
+This specification strongly suggests the use of HTTPS for [=interaction URLs=]
 for the following reasons:
       </p>
 
