@@ -3481,11 +3481,12 @@ More details can be found in [[[DIDCOMM]]].
               <td>`OID4VCI`</td>
               <td>
                 <p>
-A deprecated version of the newer `oid4vci` interaction protocol property
-that is indifinitely retained here for backwards compatibility.
-Implementers are advised to use the `oid4vci` property for OID4VCI exchanges
-and allow for a reasonable transition period during which they interpret
-`OID4VCI` from peer systems as `oid4vci`.
+A deprecated and unversioned variant of the `oid4vci` versioned interaction
+protocol properties that is indefinitely retained here for backwards
+compatibility. Implementers are advised to upgrade to one or more of the
+versioned variants of the `oid4vci` properties, only using the deprecated
+`OID4VCI` property for a reasonable transition period during which they interpret
+`OID4VCI` from peer systems as an unversioned or multiversion variant.
                 </p>
               </td>
             </tr>
@@ -3493,11 +3494,12 @@ and allow for a reasonable transition period during which they interpret
               <td>`OID4VP`</td>
               <td>
                 <p>
-A deprecated version of the newer `oid4vp` interaction protocol property
-that is indifinitely retained here for backwards compatibility.
-Implementers are advised to use the `oid4vp` property for OID4VP exchanges
-and allow for a reasonable transition period during which they interpret
-`OID4VP` from peer systems as `oid4vp`.
+A deprecated and unversioned variant of the `oid4vp` versioned interaction
+protocol properties that is indefinitely retained here for backwards
+compatibility. Implementers are advised to upgrade to one or more of the
+versioned variants of the `oid4vp` properties, only using the deprecated
+`OID4VP` property for a reasonable transition period during which they interpret
+`OID4VP` from peer systems as an unversioned or multiversion variant.
                 </p>
               </td>
             </tr>
@@ -3505,12 +3507,11 @@ and allow for a reasonable transition period during which they interpret
         </table>
 
         <p class="note" title="Versioning exchange protocols">
-In order to remove ambiguity around the protocol versions that
-an exchange supports, implementers might consider adding information
-to the protocol properties. One way to do this would be to use the
-pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `oid4vp`/`OID4VP`,
-they could use `oid4vp-draft28` or `oid4vp-1.0`. However, in the case of
-`oid4vci`/`OID4VCI` and `oid4vp`/`OID4VP`, implementers SHOULD use `oid4vci-1.0` and `oid4vp-1.0` respectively.
+For protocols where version ambiguity could cause interoperability
+issues, implementers might consider adding information to the protocol
+properties. One way to do this would be to use the
+pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `oid4vp`,
+they ought to use `oid4vp-draft28` or `oid4vp-1.0`.
         </p>
 
         <p class="note" title="Mapping to exchange URLs">
