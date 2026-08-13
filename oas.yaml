@@ -1153,6 +1153,12 @@ components:
             didcomm:
               type: string
               description: The URL to use when initiating a DIDComm exchange.
+            oid4vci-1.0:
+              type: string
+              description: The URL to use when initiating a OID4VCI issuance.
+            oid4vp-1.0:
+              type: string
+              description: The URL to use when initiating a OID4VP presentation.
             OID4VCI:
               type: string
               description: A deprecated version of <code>oid4vci</code>.

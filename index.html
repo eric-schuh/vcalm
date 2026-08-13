@@ -3429,11 +3429,20 @@ More details can be found in Section [[[#vcapi-interaction-protocol]]].
               </td>
             </tr>
             <tr>
-              <td>`oid4vci`</td>
+              <td>`didcomm`</td>
+              <td>
+The `didcomm` interaction protocol is used to initiate a credential issuance or presentation
+flow in accordance with the latest version of [[DIDCOMM]].
+The value of this entry should be the Out-of-Band (OOB) Invitation URL for the exchange.
+More details can be found in [[[DIDCOMM]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`oid4vci-1.0`</td>
               <td>
                 <p>
-The `oid4vci` interaction protocol is used to initiate a credential issuance
-flow in accordance with the latest version of [[OPENID4VCI]].
+The `oid4vci-1.0` interaction protocol is used to initiate a credential issuance
+flow in accordance with version 1.0 of [[OPENID4VCI]].
 The value of this entry should be the Authorization Endpoint, against which
 the wallet should perform an Authorization Request for the exchange.
 More details can be found in [[[OPENID4VCI]]].
@@ -3449,11 +3458,11 @@ the versioned variant of this property as described in the protocol versioning n
               </td>
             </tr>
             <tr>
-              <td>`oid4vp`</td>
+              <td>`oid4vp-1.0`</td>
               <td>
                 <p>
-The `oid4vp` interaction protocol is used to initiate a credential presentation
-flow in accordance with the latest version of [[OPENID4VP]].
+The `oid4vp-1.0` interaction protocol is used to initiate a credential presentation
+flow in accordance with version 1.0 of [[OPENID4VP]].
 The value of this entry should be the Authorization Endpoint, against which
 the wallet should perform an Authorization Request for the exchange.
 More details can be found in [[[OPENID4VP]]].
@@ -3466,15 +3475,6 @@ stable 1.0 version, it is difficult for a wallet to know how to process an inbou
 without coordination in advance. As a result of this, implementers are advised to use
 the versioned variant of this property as described in the protocol versioning note below.
                 </p>
-              </td>
-            </tr>
-            <tr>
-              <td>`didcomm`</td>
-              <td>
-The `didcomm` interaction protocol is used to initiate a credential issuance or presentation
-flow in accordance with the latest version of [[DIDCOMM]].
-The value of this entry should be the Out-of-Band (OOB) Invitation URL for the exchange.
-More details can be found in [[[DIDCOMM]]].
               </td>
             </tr>
             <tr>
