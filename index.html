@@ -2802,8 +2802,8 @@ returned by this endpoint MUST be an empty JSON object.
           data-api-endpoint="get /workflows/{localWorkflowId}/exchanges/{localExchangeId}/request"></div>
 
         <p>
-This might be a useful endpoint for integration with the [[[DCAPI]]].
-To make a [[DCAPI]] request backed by the VCALM protocol, the [=coordinator=]
+This might be a useful endpoint for integration with [[[digital-credentials]]].
+To make a [[digital-credentials]] request backed by the VCALM protocol, the [=coordinator=]
 MUST provide the [=interaction URL=] as the request data. Subsequently, the
 browser MUST fetch the [=interaction URL=], retrieve the supported protocols,
 and perform an HTTP GET on the `vcapi` URL concatenated with `/request`.
@@ -2821,13 +2821,13 @@ forwarded for a cross-device request.
 Finally, this endpoint operates without the need for signed requests, as it MAY
 rely on TLS and existing CA infrastructure, without a need for new certificates
 nor a need to incorporate those into the exchange protocol in an additive way.
-However, if we find that the [[DCAPI]] or other supported protocols require
+However, if we find that the [[digital-credentials]] or other supported protocols require
 signed requests or encrypted responses, then the request MAY be returned as a
 signed object referencing a public key that SHOULD be used to encrypt the response.
 Upon receipt of the (potentially encrypted) response, the [=coordinator=] could
 decrypt and deliver the response to the appropriate exchange or delegate decryption
 support to the exchange service altogether. The official decision on which interface
-VCALM prescribes for performing this functionality is in flux as the [[DCAPI]] rules
+VCALM prescribes for performing this functionality is in flux as the [[digital-credentials]] rules
 continue to evolve.
         </p>
 
