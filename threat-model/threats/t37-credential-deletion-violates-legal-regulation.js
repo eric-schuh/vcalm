@@ -9,6 +9,7 @@
         ],
         elements: ["P7", "P8", "P9", "C5"],
         tags: ["privacy"],
+        tags: ["privacy"],
         taxonomyName: "STRIDE",
         taxonomyClass: "Information Disclosure"
     };
