@@ -4506,7 +4506,7 @@ sequenceDiagram
     Note left of IWF: Initiate exchange by POSTing an empty JSON object.
 
     IWF->>IC: Coordinate
-    IC->>IC: Apply buisiness rules
+    IC->>IC: Apply business rules
     IC->>IWF: Return VPR (auth request)
     IWF->>HC: Verifiable Presentation Request
     
@@ -4562,7 +4562,7 @@ sequenceDiagram
     Note left of VWF: Initiate exchange including the created VP.
 
     VWF->>VC: Validate VP
-    VC->>VC: Apply buisiness rules
+    VC->>VC: Apply business rules
     VC->>VC: Extract contained VC-098 from VP
     VC->>VS: POST /credentials/verify ({extractedVC-098})
 
@@ -4607,7 +4607,7 @@ sequenceDiagram
     Note left of VWF: Initiate exchange including the requested VP.
 
     VWF->>VC: Validate VP
-    VC->>VC: Apply buisiness rules
+    VC->>VC: Apply business rules
     VC->>VS: POST /presentations/verify ({verifiablePresentation})
 
     VS->>VC: Verification Result
