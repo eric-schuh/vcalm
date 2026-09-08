@@ -8,8 +8,9 @@
             { id: "R4", name: "Granular Privilege Scoping", type: "Reduce", desc: "Enforce explicit, fine-grained access control scopes combined with server-side validation rules to verify the identity and permission layout of any invoking resource." }
         ],
         elements: ["P7", "F16"],
+        tags: ["security"],
         taxonomyName: "STRIDE",
-        taxonomyClass: "Elevation of Privilege, Spoofing"
+        taxonomyClass: "Elevation of Privilege"
     };
     window.ThreatModel.register(threat);
 })();
