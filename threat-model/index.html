@@ -199,6 +199,23 @@
     <p>
       A discussion of use cases can be found at <a href="https://w3c-ccg.github.io/vc-api-use-cases/">https://w3c-ccg.github.io/vc-api-use-cases/</a>.
     </p>
+
+    <h3>Other Security Considerations</h3>
+
+      <p>
+        Since the interfaces to manage the lifecycle of [=verifiable credentials=]
+        described by this specification are generalized in nature, the security
+        implications of their use might not be immediately apparent to readers.
+        To understand the sort of security
+        concerns one might need to consider in a complete software system, implementers
+        are urged to read about how this technology can be used by the
+        [[[?VC-DATA-MODEL-2.0]]] specification (specifically the section
+        on <a data-cite="?VC-DATA-MODEL-2.0#security-considerations">
+        Verifiable Credential Security Considerations</a>), as well as the
+        [[[?VC-DATA-INTEGRITY]]] specification (specifically the section
+        on <a data-cite="?VC-DATA-INTEGRITY#security-considerations">
+        Data Integrity Security Considerations</a>).
+      </p>
  
     <section id="threat-model-description">
       <h3>Description</h3>
@@ -725,7 +742,6 @@
       want to implement a selection of protocols that are commonly in use across various ecosystems in the real world to facilitate minimal 
       but informed interaction experiences for their users that allow them to easily make use of their credentials.
     </p>
-
         
   </section>
   <section id="threat-model-threats">
@@ -735,55 +751,6 @@
     <section id="threat-model-details">
     </section>
   </section>
-  
-
-  <section class="appendix">
-    <h2>Security Considerations</h2>
-    <p>
-      This section details additional security considerations that were not 
-      found to have direct threats related to this specification but the group
-      still wanted to highlight. 
-    </p>
-
-    <section>
-      <h3>Secure Coding Practices</h3>
-
-      <p>
-        Implementers are urged to use industry standard secure coding practices when
-        implementing this specification. Even deeply experienced software developers can
-        make mistakes and the use of secure coding checklists and vulnerability scanning
-        software can catch errors that would result in security compromises. Following
-        checklists and guides such as the
-        <a href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/stable-en/">
-        OWASP Secure Coding Practices Checklist</a> and the
-        <a href="https://owasp.org/www-project-web-security-testing-guide/">
-        OWASP Web Security Testing Guide</a> can help reduce the chance of insecure
-        implementations.
-      </p>
-    </section>
-
-    <section>
-      <h3>Other Security Considerations</h3>
-
-      <p>
-        Since the interfaces to manage the lifecycle of [=verifiable credentials=]
-        described by this specification are generalized in nature, the security
-        implications of their use might not be immediately apparent to readers.
-        To understand the sort of security
-        concerns one might need to consider in a complete software system, implementers
-        are urged to read about how this technology can be used by the
-        [[[?VC-DATA-MODEL-2.0]]] specification (specifically the section
-        on <a data-cite="?VC-DATA-MODEL-2.0#security-considerations">
-        Verifiable Credential Security Considerations</a>), as well as the
-        [[[?VC-DATA-INTEGRITY]]] specification (specifically the section
-        on <a data-cite="?VC-DATA-INTEGRITY#security-considerations">
-        Data Integrity Security Considerations</a>).
-      </p>
-    </section>
-
-  </section>
-
-
 </body>
 
 </html>
