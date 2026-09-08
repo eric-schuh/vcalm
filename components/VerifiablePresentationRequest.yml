@@ -107,7 +107,7 @@ components:
             properties:
               "mediaType":
                 type: string
-                description: The media type of the envelope format.
+                description: The media type of the credential format.
                 example: [{"mediaType": "application/vc"}]
               "credential":
                 type: object
