@@ -3896,6 +3896,66 @@ Workflow Variables Allow Workflow Template to be Misused
           <span class="threat-tag threat-tag-security">security</span> —
 Workflow variable options expose unintended workflow paths allowing misused workflows or malicious actors to achieve unintended outcomes for the workflow.
         </li>
+        <li value="33">
+          <a href="threat-model/index.html#t33-verifier-phones-home-about-specific-verifiable-credential">
+Verifier Phones Home About Specific Verifiable Credential
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+It is considered a bad privacy practice for a verifier to contact an issuer about a specific verifiable credential. This practice is known as "phoning home" 
+and can result in a mismatch in privacy expectations between holders, issuers, verifiers, and other parties expressed in a verifiable credential. 
+Phoning home enables issuers to correlate unsuspecting parties with the use of certain verifiable credentials which can violate privacy expectations that 
+each entity might have regarding the use of those credentials. For example, what is expected by the holder to be a private interaction between them and 
+the verifier becomes one where the issuer is notified of the interaction.
+        </li>
+        <li value="34">
+          <a href="threat-model/index.html#t34-unknown-proof-types">
+Unknown Proof Types
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Holder coordinator implementations, such as digital wallet software, can receive and store verifiable credentials that include proofs that are not understood by the software.
+        </li>
+        <li value="35">
+          <a href="threat-model/index.html#t35-interaction-url-does-not-use-https">
+Interaction URL Does Not Use HTTPS
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Using protocol schemes that are not rooted in the HTTPS trust model requires separate encryption protocol, key management, and trust models to be used, 
+which are often less broadly developed and deployed and require much more development and analysis to determine the threat and privacy model.
+        </li>
+        <li value="36">
+          <a href="threat-model/index.html#t36-deletion-request-only-results-in-partial-deletion-of-credential">
+Deletion Request Only Results in Partial Deletion of Credential
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+The APIs provided by this specification enable the deletion of verifiable credentials and verifiable presentations from storage services. 
+In some cases, a record may be only partially deleted which means that some or all of the original information continues to be stored. 
+This mode of operation can be useful if there are audit requirements for all credentials and/or presentations over a particular time period, 
+or if recovering an original credential might be a useful feature to provide but can lead to unintended persistence of records for longer than necessary.
+        </li>
+        <li value="38">
+          <a href="threat-model/index.html#t38-mishandled-status-information-upon-credential-deletion-reveals-information">
+Mishandled Status Information Upon Credential Deletion Lead to Holder Confusion 
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+When deleting a verifiable credential, handling of its status information needs to be considered. 
+Some use cases might call for deletion of a particular verifiable credential to also set the revocation and suspension bits of that verifiable credential, 
+such that any sort of status check for the deleted credential fails and use of the credential is halted without the knowledge of the holder. 
+This can lead to frustration and confusion when the holder attempts to use the credential for what they deem to be a valid purpose.
+        </li>
+        <li value="39">
+          <a href="threat-model/index.html#t39-large-payload-triggers-denial-of-service-dos">
+Large Payload Triggers Denial of Service (DoS)
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Large transaction payloads can trigger DoS incidents.
+        </li>
+        <li value="40">
+          <a href="threat-model/index.html#t40-improper-credential-validation-leads-to-security-vulnerabilities">
+Improper Credential Validation Leads to Security Vulnerabilities
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+In most cases, simply verifying the proof might not be sufficient to properly handle the received data. Improper validation will often lead to security vulnerabilities.
+        </li>
       </ol>
     </section>
 
@@ -3946,6 +4006,36 @@ Ecosystem Gatekeeping in the Name of Security or Privacy
           <span class="threat-tag">market competition</span> —
 Primary ecosystem actors choose to restrict their support of particular protocols or data formats in the name of security or privacy whereas in reality they are trying to push the ecosystem to adopt their solution.
         </li>
+        <li value="30">
+          <a href="threat-model/index.html#t30-issuance-request-and-or-delivery-made-by-third-party">
+Unintended Data Leak Due to Third Party Processing
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+Verifiable credentials issuance has a request phase and a delivery phase. The request might be made by the subject or another role, and delivery can be to a client that might or might not be controlled by the subject.
+        </li>
+        <li value="31">
+          <a href="threat-model/index.html#t31-unintended-data-leak-due-to-third-party-processing">
+Unintended Data Leak Due to Third Party Processing
+          </a>
+          <span class="threat-tag threat-tag-privacy">privacy</span> —
+An issuer or verifier may make use of a third party service to process some data during an issuance or verification workflow. 
+This third party service becomes a potential data leak risk as it may be able to aggregate across different issuers or verifiers using its services.
+        </li>
+        <li value="32">
+          <a href="threat-model/index.html#t32-malicious-entity-acts-on-behalf-of-incapable-party">
+Malicious Entity Acts on Behalf of Incapable Party
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+Some subjects such as a new born baby, a pet, or a person with dementia, are incapable of acting on their own behalf. 
+In these cases requests may be made on behalf of a subject with no cryptographic delegation possible. This can be problematic when guardians have malicious intent.
+        </li>
+        <li value="37">
+          <a href="threat-model/index.html#t37-credential-deletion-violates-legal-regulation">
+Credential Deletion Violates Legal Regulation
+          </a>
+          <span class="threat-tag threat-tag-privacy">privacy</span> —
+Due to some legal regulations and/or audit requirements, the complete or partial storage of a credential is required for some amount of time after a deletion request has been made.
+        </li>        
       </ol>
     </section>
 
