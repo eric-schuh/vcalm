@@ -347,6 +347,31 @@ paths:
           description: Not Authorized
         "500":
           description: Internal Error
+  /workflows/{localWorkflowId}/exchanges/{localExchangeId}/request:
+    get:
+      summary: Gets the current VPR for an exchange.
+      tags:
+        - Exchanges
+      security:
+        - networkAuth: []
+        - oAuth2: []
+        - zCap: []
+      operationId: getCurrentExchangeVpr
+      description: Gets the current VPR for an exchange (if available). This might be a useful endpoint for integration with the DC API. Processing this request SHOULD not advance the exchange to a new step nor perform any state-changing side effects, such as credential issuance.
+      x-expectedCaller: Anyone with provided URL
+      x-componentTableLink: "get-current-exchange-vpr"
+      parameters:
+        - $ref: "./components/parameters/path/LocalWorkflowId.yml"
+        - $ref: "./components/parameters/path/LocalExchangeId.yml"
+      responses:
+        "200":
+          description: Current VPR to be returned by the exchange.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCurrentExchangeVprResponse"
+        "500":
+          description: Internal Error
   /credentials/{id}:
     get:
       tags:
@@ -1103,7 +1128,7 @@ components:
           properties:
             redirectUrl:
               type: string
-              description: The URL the exchange wishes to redirect the client to.
+              description: The URL the exchange wishes to redirect the client to. A server MAY also send an interaction URL to the client as a redirectUrl, inviting the client to automatically initiate another exchange. In this case, a client that understands interaction URLs MAY retrieve the protocols associated with the interaction URL and start the exchange. A client that does not understand interaction URLs MAY direct the holder to the redirectUrl in the browser, where an HTML page MAY display next steps.
             referenceId:
               type: string
               description: An optional identifier to correlate exchange messages. A server MAY include this value; if present, the client SHOULD include it in its next message. The value SHOULD be a <code>urn:uuid</code> value.
@@ -1118,16 +1143,35 @@ components:
           properties:
             interact:
               type: string
-              description: A URL that can be used during exchange flows with a human in the loop. See the section on the <a href="#dfn-interaction-url">interact URL format</a> for more details.
+              description: A different interaction URL to which a wallet should be redirected to continue the exchange. See the section on the <a href="#dfn-interaction-url">interaction URL format</a> for more details.
+            inviteRequest:
+              type: string
+              description: The URL of a website where an individual can engage in a use-case-specific interaction. See the section on the <a href="#inviterequest-interaction-protocol">inviteRequest</a> for more details.
             vcapi:
               type: string
               description: The URL to use when initiating a VCALM exchange.
-            OID4VP:
+            didcomm:
               type: string
-              description: The URL to use when initiating an OID4VP presentation.
+              description: The URL to use when initiating a DIDComm exchange.
+            oid4vci-1.0:
+              type: string
+              description: The URL to use when initiating a OID4VCI issuance.
+            oid4vp-1.0:
+              type: string
+              description: The URL to use when initiating a OID4VP presentation.
             OID4VCI:
               type: string
-              description: The URL to use when initiating an OID4VCI issuance.
+              description: A deprecated version of <code>oid4vci</code>.
+            OID4VP:
+              type: string
+              description: A deprecated version of <code>oid4vp</code>.
+    GetCurrentExchangeVprResponse:
+      type: object
+      additionalProperties: false
+      description: The current VPR for an exchange.
+      properties:
+        verifiablePresentationRequest:
+          $ref: "./components/VerifiablePresentationRequest.yml#/components/schemas/VerifiablePresentationRequest"
     GetExchangeResponse:
       type: object
       additionalProperties: false
@@ -1215,12 +1259,6 @@ components:
           items:
             type: object
             properties:
-              credentialTemplateId:
-                type: string
-                description: The ID of the item in workflow.credentialTemplates that captures the schema of a credential that is issued in a step.
-              credentialTemplateIndex:
-                type: number
-                description: The index of the item in workflow.credentialTemplates that captures the schema of a credential that is issued in a step.
               # Optionally specify different variables from exchange.variables
               # (either a string that is the name of a variable in exchange.variables
               # to use, or a whole object with alternative variables)
@@ -1232,10 +1270,20 @@ components:
                 type: string
                 description: If present, identifies where the result of the issue request is to be stored. The value MUST be either the name of a top-level variable in the exchange's variables object or a JSON pointer to any variable within the exchange's variables object.
             oneOf:
-              - required:
+              - type: object
+                required:
                   - credentialTemplateId
-              - required:
+                properties:
+                  credentialTemplateId:
+                    type: string
+                    description: The ID of the item in workflow.credentialTemplates that captures the schema of a credential that is issued in a step.
+              - type: object
+                required:
                   - credentialTemplateIndex
+                properties:
+                  credentialTemplateIndex:
+                    type: string
+                    description: The index of the item in workflow.credentialTemplates that captures the schema of a credential that is issued in a step.
             additionalProperties: false
         presentationSchema:
           oneOf:
@@ -1437,12 +1485,6 @@ components:
       additionalProperties: false
       description: Client profile configuration for exchanges using OID4VCI/OID4VP.
       properties:
-        createAuthorizationRequest:
-          type: string
-          description: If present, identifies where the auto-generated OID4VP authorization request will be stored for subsequent use in the exchange. The value MUST be either the name of a top-level variable in the exchange's <code>variables</code> object (see <a href="#create-exchange">Create Exchange</a>) or a JSON pointer to any variable within the exchange's <code>variables</code> object. Either this or <code>authorizationRequest</code> MUST be present, but not both. The value of the named variable can be lazily generated when the authorization request is required, i.e., after the client of the exchange chooses to use the OID4VP protocol. This feature allows the authorization request to be generated by reusing values, e.g., a Verifiable Presentation Request, that only need to be specified once across multiple protocol offerings.
-        authorizationRequest:
-          type: object
-          description: If present, an OID4VP authorization request for subsequent use in the exchange. Either this or <code>createAuthorizationRequest</code> MUST be present, but not both.
         # The following are optional properties that can be used as overrides in any authorization request:
         # ====================================================================================================
         client_id:
@@ -1509,18 +1551,20 @@ components:
           required:
             - signAuthorizationRequest
       oneOf:
-        # An authorization request or a directive to create one can be used,
-        # but not both
-        - required:
+        - type: object
+          required:
             - createAuthorizationRequest
-          not:
-            required:
-              - authorizationRequest
-        - required:
+          properties:
+            createAuthorizationRequest:
+              type: string
+              description: If present, identifies where the auto-generated OID4VP authorization request will be stored for subsequent use in the exchange. The value MUST be either the name of a top-level variable in the exchange's <code>variables</code> object (see <a href="#create-exchange">Create Exchange</a>) or a JSON pointer to any variable within the exchange's <code>variables</code> object. Either this or <code>authorizationRequest</code> MUST be present, but not both. The value of the named variable can be lazily generated when the authorization request is required, i.e., after the client of the exchange chooses to use the OID4VP protocol. This feature allows the authorization request to be generated by reusing values, e.g., a Verifiable Presentation Request, that only need to be specified once across multiple protocol offerings.
+        - type: object
+          required:
             - authorizationRequest
-          not:
-            required:
-              - createAuthorizationRequest
+          properties:
+            authorizationRequest:
+              type: object
+              description: If present, an OID4VP authorization request for subsequent use in the exchange. Either this or <code>createAuthorizationRequest</code> MUST be present, but not both.
     OpenIdExchangeConfig:
       type: object
       additionalProperties: false

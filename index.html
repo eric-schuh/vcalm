@@ -6,7 +6,7 @@
   <script class="remove"
     src="https://www.w3.org/Tools/respec/respec-w3c"></script>
   <script class="remove"
-    src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-oas@1.0.1/dist/main.js"></script>
+    src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-oas@1.0.2/dist/main.js"></script>
   <script class="remove"
     src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-mermaid@1.3.0/dist/main.js"></script>
 
@@ -53,29 +53,11 @@
         status: "Published",
         publisher: "ISO"
       },
-      "DCAPI": {
-        title: "Digital Credential API",
-        href: "https://www.w3.org/TR/digital-credentials/",
-        status: "WD",
-        publisher: "W3C"
-      },
-      "OID4VCI": {
-        title: "OpenID for Verifiable Credential Issuance v1.0",
-        href: "https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html",
-        status: "WD",
-        publisher: "OpenID Foundation"
-      },
-      "OID4VP": {
-        title: "OpenID for Verifiable Presentations v1.0",
-        href: "https://openid.net/specs/openid-4-verifiable-presentations-1_0.html",
-        status: "WD",
-        publisher: "OpenID Foundation"
-      },
-      "VC-RECOG-ENT": {
-        title: "Recognized Entities v1.0",
-        href: "https://www.w3.org/TR/vc-recognized-entities/",
-        status: "WD",
-        publisher: "W3C"
+      "DIDCOMM": {
+        title: "DIDComm Messaging",
+        href: "https://identity.foundation/didcomm-messaging/spec/",
+        status: "Editor's Draft",
+        publisher: "DIF"
       },
       "ZCAP": {
         title: "Authorization Capabilities for Linked Data v0.3",
@@ -183,6 +165,7 @@
     }]
   };
   </script>
+  <link rel="stylesheet" href="threat-model/threats/threat-model.css" />
   <style>
 code {
   color: rgb(199, 73, 0);
@@ -1605,7 +1588,7 @@ identifies an [=issuer=] in the `issuer` property of the received [=verifiable
 credential=], or 3) an object that contains a `recognizedIn` property that is
 associated with an object with a `type` property that is set to
 `RecognizedEntityCredential` and an `id` property with a [[URL]] value that
-points to such a credential as defined in the [[[VC-RECOG-ENT]]]
+points to such a credential as defined in the [[[VC-RECOGNIZED-ENTITIES]]]
 specification; the list contains recognized issuers that are acceptable to the
 [=verifier=]. Valid example values include:
 
@@ -2162,8 +2145,8 @@ verifiable credentials between two parties across a trust boundary. Each step
 can involve the issuance, verification, transmission, and/or presentation of
 verifiable credentials. Workflows are designed to support both linear sequences
 of steps and more complex patterns including branching logic and repeated steps,
-enabling sophisticated interactions between the parties involved. Examples of VC
-API workflows include, but are not limited to, the following:
+enabling sophisticated interactions between the parties involved. Examples of
+VCALM workflows include, but are not limited to, the following:
       </p>
       <ul class="bullet">
         <li>
@@ -2257,22 +2240,22 @@ code, or a universal link.
       <p>
 Exchanges are designed to be executable using other protocols in
 addition to this API exchange protocol; for example, an exchange could
-potentially be executable with any of the OID4VCI, OID4VP, DIDComm, and
-exchange protocols. The protocols supported depend on the complexity
-of the workflow the exchange is based on, and the options provided by the
-coordinator when the exchange was created.
+potentially be executable with any of the [[OPENID4VCI]], [[OPENID4VP]],
+[[DIDCOMM]], and exchange protocols. The protocols supported depend on the
+complexity of the workflow the exchange is based on, and the options provided
+by the coordinator when the exchange was created.
       </p>
       <p>
 The exchange client is expected to initiate the exchange using a protocol that
 is compatible with how the client received the exchange URL. For example, the
 exchange URL could have been provided over CHAPI with a protocol identifier
 indicating that this API protocol ought to be used. Alternatively, the
-exchange URL could be included as the "credential_issuer" in an OID4VCI
-credential offer, or as the "client_id" of an OID4VP authorization request,
-indicating that OID4VCI or OID4VP, respectively, ought to be used. This section
+exchange URL could be included as the `credential_issuer` in an [[OPENID4VCI]]
+credential offer, or as the `client_id` of an [[OPENID4VP]] authorization request,
+indicating that [[OPENID4VCI]] or [[OPENID4VP]], respectively, ought to be used. This section
 focuses on how an exchange client uses this API to interact with the exchange; see
-<span class="issue">Appendix TBD</span> to see how to combine exchanges
-with other protocols such as OID4VCI, OID4VP, and DIDComm.
+Section [[[#interaction-protocols-response]]] to see how to combine exchanges
+with other protocols such as [[OPENID4VCI]], [[OPENID4VP]], and [[DIDCOMM]].
       </p>
       <p>
 Exchanges that are executed using this API protocol involve messages sent as
@@ -2617,7 +2600,7 @@ referenced in the `didAuthRequest` step):
         <p>
 For the `openId` options, specifically the values
 `createAuthorizationRequest` and `authorizationRequest`, the example below is
-provided to help developers understand what an OID4VP Authorization Request
+provided to help developers understand what an [[OPENID4VP]] Authorization Request
 looks like:
         </p>
 
@@ -2799,6 +2782,54 @@ An example of a wallet using a protocol to a delegated exchange service.
 This enables the client to depend on their trust in `brand.example` to delegate
 the operation of the exchange to a third party in the same way that a website
 links to resources from other domains to render a web page.
+        </p>
+
+      </section>
+
+      <section>
+        <!--If this header is changed, also update the x-componentTableLink parameter for this endpoint in the oas.yaml file.
+            If the x-componentTableLink isn't updated to match the corresponding Component Table link will break.-->
+        <h4>Get Current Exchange VPR</h4>
+        <p>
+This endpoint MUST return the current [=verifiable presentation request=] to be returned by an exchange
+when accessed with an `Accept` header value of `application/json`. Processing this
+request SHOULD NOT advance the exchange to a new step nor perform any
+state-changing side effects, such as credential issuance. If there is no [=verifiable presentation request=]
+available for the exchange in the current step, the value of the `verifiablePresentationRequest` property
+returned by this endpoint MUST be an empty JSON object.
+        </p>
+
+        <div class="api-detail"
+          data-api-endpoint="get /workflows/{localWorkflowId}/exchanges/{localExchangeId}/request"></div>
+
+        <p>
+This might be a useful endpoint for integration with [[[digital-credentials]]].
+To make a [[digital-credentials]] request backed by the VCALM protocol, the [=coordinator=]
+MUST provide the [=interaction URL=] as the request data. Subsequently, the
+browser MUST fetch the [=interaction URL=], retrieve the supported protocols,
+and perform an HTTP GET on the `vcapi` URL concatenated with `/request`.
+        </p>
+
+        <p>
+This feature allows the browser to route their requests through the
+[=coordinator's=] origin (thereby anchoring the entire operation in said origin),
+to the delegate they have approved as a service provider.
+This convenience exists whether the request is made on the same device or
+forwarded for a cross-device request.
+        </p>
+
+        <p>
+Finally, this endpoint operates without the need for signed requests, as it MAY
+rely on TLS and existing CA infrastructure, without a need for new certificates
+nor a need to incorporate those into the exchange protocol in an additive way.
+However, if we find that the [[digital-credentials]] or other supported protocols require
+signed requests or encrypted responses, then the request MAY be returned as a
+signed object referencing a public key that SHOULD be used to encrypt the response.
+Upon receipt of the (potentially encrypted) response, the [=coordinator=] could
+decrypt and deliver the response to the appropriate exchange or delegate decryption
+support to the exchange service altogether. The official decision on which interface
+VCALM prescribes for performing this functionality is in flux as the [[digital-credentials]] rules
+continue to evolve.
         </p>
 
       </section>
@@ -3051,8 +3082,8 @@ QR Code (optical medium), or NFC (wireless medium) &mdash; where the protocol
 does not need to involve this API.
       </p>
       <p>
-The sequence diagram below outlines an [=issuer=] generating an interaction
-URL, using a QR Code to share it with a [=holder=], and proceeding with the
+The sequence diagram below outlines an [=issuer=] generating an [=interaction
+URL=], using a QR Code to share it with a [=holder=], and proceeding with the
 `vcapi` protocol:
       </p>
       <figure>
@@ -3092,8 +3123,8 @@ An issuer-initiated interaction using a QR Code
       </figure>
 
       <p>
-The sequence diagram below outlines a [=verifier=] generating an interaction
-URL, using a QR Code to share it with a [=holder=], and proceeding with the
+The sequence diagram below outlines a [=verifier=] generating an [=interaction
+URL=], using a QR Code to share it with a [=holder=], and proceeding with the
 `vcapi` protocol:
       </p>
       <figure>
@@ -3133,7 +3164,7 @@ A verifier-initiated interaction using a QR Code
       </figure>
 
       <p>
-The sequence diagram below outlines a [=holder=] generating an interaction URL,
+The sequence diagram below outlines a [=holder=] generating an [=interaction URL=],
 using a QR Code to share it with a [=verifier=], and proceeding with the
 `inviteRequest` protocol:
       </p>
@@ -3173,9 +3204,9 @@ A holder-initiated interaction using a QR Code
         <h4>Interaction URL Format</h4>
         <p>
 The format of the <dfn>interaction URL</dfn> MUST conform to the syntax for the
-[[[URL]]] and contain an `iuv` query parameter encoding the interaction URL
+[[[URL]]] and contain an `iuv` query parameter encoding the [=interaction URL=]
 version number, which MUST be `1` when using this version of this API. The
-interaction URL SHOULD be an HTTPS URL that contains an interaction-specific
+[=interaction URL=] SHOULD be an HTTPS URL that contains an interaction-specific
 identifier. The URL SHOULD be opaque and require no URL syntax processing before
 it is fetched by the receiving system. An example of such a URL is shown below:
         </p>
@@ -3189,16 +3220,16 @@ Protocols that encode lengthy protocol-specific information into URLs suffer
 from limitations placed by software libraries on the maximum allowable length of a URL.
 At the time of writing, the suggested URL length limit is roughly 2,000
 characters. Implementers SHOULD NOT put information that can be expressed in the
-response to a GET request for an interaction URL, defined in Section
+response to a GET request for an [=interaction URL=], defined in Section
 [[[#interaction-protocols-response]]], into the query parameters of the
-interaction URL.
+[=interaction URL=].
         </p>
       </section>
 
         <p class="note" title="Interactions URL lives on Coordinators, not Workflow Services">
-A coordinator has the freedom to put the interaction URL at any location on its Web origin, because
+A coordinator has the freedom to put the [=interaction URL=] at any location on its Web origin, because
 it is expected to be considered opaque by consuming software (except for the `iuv` query parameter).
-However, it is important that the interaction URL be hosted on a coordinator and NOT hosted at the
+However, it is important that the [=interaction URL=] be hosted on a coordinator and NOT hosted at the
 workflow service. This enables the coordinator's Web origin (DNS domain name) to be used as a consistent trust signal by
 consumers and the application of business rules that might modulate actions.
 
@@ -3230,7 +3261,8 @@ An interaction QR code for `https://app.example/interactions/z8n38Dp7a?iuv=1`
         <p>
 It can be useful to invoke an application that is capable of processing an
 [=interaction URL=]. This section defines an `interaction:` protocol scheme
-format for this purpose. The format of the protocol scheme MUST conform to
+format (for native apps) and a `web+interaction:` protocol scheme format
+(for web apps) for this purpose. The format of the protocol scheme MUST conform to
 the following syntax:
         </p>
 
@@ -3246,7 +3278,7 @@ the following syntax:
             <tr>
               <td>
                 <pre class="nohighlight">
-  scheme          = "interaction:" interaction-url
+  scheme          = ("interaction:" / "web+interaction:") interaction-url
   interaction-url = <a href="https://url.spec.whatwg.org/#concept-url">URL</a>
                 </pre>
               </td>
@@ -3260,8 +3292,12 @@ the following syntax:
   <a href="#interaction-protocols-response">interaction protocols response</a>.
         </p>
 
-        <pre class="example nohighlight" title="An example of an interaction scheme URL">
+        <pre class="example nohighlight" title="An example of a native interaction scheme URL">
   interaction:https://app.example/interactions/z8n38Dp7a?iuv=1
+        </pre>
+
+        <pre class="example nohighlight" title="An example of a web interaction scheme URL">
+  web+interaction:https://app.example/interactions/z8n38Dp7a?iuv=1
         </pre>
 
       </section>
@@ -3276,7 +3312,7 @@ on how to start an interaction with the remote system.
         </p>
 
         <p>
-When the [=interaction URL=] is fetched using an `Accept` header of
+When the [=interaction URL=] is fetched using an `Accept` header value of
 `application/json`, a single JSON object containing a `protocols` [=map=] MUST
 be returned where each [=map/key=] is a protocol identifier and each
 [=map/value=] is a URL that can be used to initiate the interaction. For
@@ -3290,7 +3326,7 @@ result in either of the following responses:
   "protocols": {
     "inviteRequest": "https://saas.example/workflows/123/exchanges/987/invite-request/response",
     "vcapi": "https://saas.example/workflows/123/exchanges/987",
-    "OID4VP": "openid4vp://?client_id=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Fresponse&request_uri=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Frequest'"
+    "oid4vp-1.0": "openid4vp://?client_id=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Fresponse&request_uri=https%3A%2F%2Fapp.example%2Fworkflows%2F123%2Fexchanges%2F987%2Fopenid%2Fclient%2Fauthorization%2Frequest'"
   }
 }
         </pre>
@@ -3313,9 +3349,146 @@ the `saas.example` domain in the list of protocols.
         </p>
 
         <p>
-When the [=interaction URL=] is fetched using any unrecognized `Accept` header,
+When the [=interaction URL=] is fetched using any unrecognized `Accept` header value,
 a `text/html` document MUST be returned with directions instructing a human
-being to use specific software that understands how to process interaction URLs.
+being to use specific software that understands how to process [=interaction URLs=].
+        </p>
+
+        <p>
+Below is a table of interaction protocols that are supported today.
+There is broad interest in extracting this table into a separate
+document as a dependency of this specification. The reasoning behind
+this interest is that the idea of a generic, extensible, reference
+of credential management protocols has a natural appeal across various
+communities and use cases. In the event that this migration occurs,
+implementers are expected to use that reference instead of this table
+for protocol usage. In the event that there is a conflict between the
+table below and information in the new reference, implementers
+ought to note versioning differences of this specification and proceed
+with caution.
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>`interact`</td>
+              <td>
+The `interact` interaction protocol is used to redirect a wallet to a
+different interaction URL, where the exchange will continue.
+This protocol can be used by exchanges as a delegation mechanism.
+The value of this entry should be an interaction URL.
+More details can be found in Section [[[#interaction-url-format]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`inviteRequest`</td>
+              <td>
+The `inviteRequest` interaction protocol is used by a local system to signal to
+the remote system that it would like an invitation to a remote system.
+The value of this entry should be the URL of a website where an individual can
+engage in a use-case-specific interaction.
+More details can be found in Section [[[#inviterequest-interaction-protocol]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`vcapi`</td>
+              <td>
+The `vcapi` interaction protocol is used to initiate a specific [=exchange=]
+as described in Section [[[#participate-in-an-exchange]]].
+The value of this entry should be the fully-qualified URL used as the ID for the exchange.
+More details can be found in Section [[[#vcapi-interaction-protocol]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`didcomm`</td>
+              <td>
+The `didcomm` interaction protocol is used to initiate a credential issuance or presentation
+flow in accordance with the latest version of [[DIDCOMM]].
+The value of this entry should be the Out-of-Band (OOB) Invitation URL for the exchange.
+More details can be found in [[[DIDCOMM]]].
+              </td>
+            </tr>
+            <tr>
+              <td>`oid4vci-1.0`</td>
+              <td>
+                <p>
+The `oid4vci-1.0` interaction protocol is used to initiate a credential issuance
+flow in accordance with version 1.0 of [[OPENID4VCI]].
+The value of this entry should be the Authorization Endpoint, against which
+the wallet should perform an Authorization Request for the exchange.
+More details can be found in [[[OPENID4VCI]]].
+                </p>
+                <p>
+Implementers are advised to understand the drift that has occurred with this specification
+and the impact that this has made on the semantics of this property.
+Specifically, due to the material differences between popular draft versions and the
+stable 1.0 version, it is difficult for a wallet to know how to process an inbound request
+without coordination in advance. As a result of this, implementers are advised to use
+the versioned variant of this property as described in the protocol versioning note below.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>`oid4vp-1.0`</td>
+              <td>
+                <p>
+The `oid4vp-1.0` interaction protocol is used to initiate a credential presentation
+flow in accordance with version 1.0 of [[OPENID4VP]].
+The value of this entry should be the Authorization Endpoint, against which
+the wallet should perform an Authorization Request for the exchange.
+More details can be found in [[[OPENID4VP]]].
+                </p>
+                <p>
+Implementers are advised to understand the drift that has occurred with this specification
+and the impact that this has made on the semantics of this property.
+Specifically, due to the material differences between popular draft versions and the
+stable 1.0 version, it is difficult for a wallet to know how to process an inbound request
+without coordination in advance. As a result of this, implementers are advised to use
+the versioned variant of this property as described in the protocol versioning note below.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>`OID4VCI`</td>
+              <td>
+                <p>
+A deprecated and unversioned variant of the `oid4vci` versioned interaction
+protocol properties that is indefinitely retained here for backwards
+compatibility. Implementers are advised to upgrade to one or more of the
+versioned variants of the `oid4vci` properties, only using the deprecated
+`OID4VCI` property for a reasonable transition period during which they interpret
+`OID4VCI` from peer systems as an unversioned or multiversion variant.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>`OID4VP`</td>
+              <td>
+                <p>
+A deprecated and unversioned variant of the `oid4vp` versioned interaction
+protocol properties that is indefinitely retained here for backwards
+compatibility. Implementers are advised to upgrade to one or more of the
+versioned variants of the `oid4vp` properties, only using the deprecated
+`OID4VP` property for a reasonable transition period during which they interpret
+`OID4VP` from peer systems as an unversioned or multiversion variant.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="note" title="Versioning exchange protocols">
+For protocols where version ambiguity could cause interoperability
+issues, implementers might consider adding information to the protocol
+properties. One way to do this would be to use the
+pattern "`PROTOCOL`-`MAJOR`.`MINOR`". For example, instead of `oid4vp`,
+they ought to use `oid4vp-draft28` or `oid4vp-1.0`.
         </p>
 
         <p class="note" title="Mapping to exchange URLs">
@@ -3323,7 +3496,7 @@ Some coordinator implementations will implement the protocols endpoint as a pass
 through to a protocols endpoint for an exchange instance. For example, a GET on
 `https://app.example/interactions/z8n38Dp7a?iuv=1` will result in a pass-through
 GET on `https://app.example/workflows/123/exchanges/987/protocols`, which would
-return the response above. Implementing interaction URLs in this way can
+return the response above. Implementing [=interaction URLs=] in this way can
 provide an easier implementation path.
         </p>
 
@@ -3384,8 +3557,8 @@ as described in Section [[[#participate-in-an-exchange]]].
             "studentId": ""
           },
         },
-        "trustedIssuer": [{
-          "issuer": "did:web:university.example"
+        "acceptedIssuers": [{
+          "id": "did:web:university.example"
         }]
       }
     }],
@@ -3526,6 +3699,282 @@ object MUST be set to `false`; if no errors are included, it MUST be set to
       </section>
     </section>
 
+  </section>
+
+  <section class="appendix informative">
+    <h2>Threat Model</h2>
+
+    <p>
+This section details the general threat model for this specification
+including security considerations, privacy considerations, and market
+competition considerations. It makes reference to <a href="threat-model/index.html">a detailed threat model</a>, which was created
+based on a use case of a first responder onboarding themselves to a new incident. This use case was chosen because it could be simplified
+to detail the issuance of a [=verifiable credential=] for the particular incident, predicated on the [=verification=] of an existing emergency 
+responder credential. This enabled the data flow diagram in the threat model to detail both the [=verification=] and issuance steps, in the 
+same workflow.
+    </p>
+
+    <section>
+      <h3>Target Threats</h3>
+      <ol class="threat-toc">
+        <li value="1">
+          <a href="threat-model/index.html#t1-dos-attacks-against-public-coordinator-endpoints">
+DoS Attacks Against Public Coordinator Endpoints
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Attackers perform a denial of service attack against one or more public [=coordinator=] endpoints,
+causing severe degradation of availability for legitimate clients.
+        </li>
+        <li value="4">
+          <a href="threat-model/index.html#t4-attacker-guesses-exchange-url">
+Attacker Guesses Exchange URL
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+Exchange URLs use predictable structures with discoverable workflow IDs, allowing automated scripts to only need to guess a particular
+exchange ID to effectively hijack a given exchange.
+        </li>
+        <li value="5">
+          <a href="threat-model/index.html#t5-issuance-information-stored-long-term">
+Issuance Information Stored Long-Term
+          </a>
+          <span class="threat-tag threat-tag-privacy">privacy</span> —
+Private processing logs, transaction metadata, or raw PII related to credential issuance are preserved by the issuer for longer than needed,
+creating an unintentional honey pot that could be a target for attackers.
+        </li>
+        <li value="6">
+          <a href="threat-model/index.html#t6-stolen-authorization-tokens">
+Stolen Authorization Tokens
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+A malicious entity exfiltrates authorization tokens for any involved process, using them to spoof authenticated clients.
+Depending on the affected process this could lead to any number of attacks such as: providing malicious interaction URLs,
+modifying workflows, changing issuance or verification policies, corrupting or spoofing credential statuses, etc.
+        </li>
+        <li value="17">
+          <a href="threat-model/index.html#t17-leaking-information-due-to-status-list-vc-updates">
+Leaking Information Due to Status List VC Updates
+          </a>
+          <span class="threat-tag threat-tag-privacy">privacy</span> —
+External observers consistently query status services to discover some information about the system issuing credentials,
+whether that be the rate at which they are issued, how many get issued, or in extreme cases for little used systems,
+what credential was issued to whom and when.
+        </li>
+        <li value="19">
+          <a href="threat-model/index.html#t19-interaction-urls-leak-personal-ips">
+Interaction URLs Leak Personal IPs
+          </a>
+          <span class="threat-tag threat-tag-privacy">privacy</span> —
+Direct network connections to interaction URLs expose user IP metrics and geographic data to backend servers during verification checks.
+        </li>
+        <li value="21">
+          <a href="threat-model/index.html#t21-dos-for-exchange-state-polling">
+DoS for Exchange State Polling
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+High frequencies of client state queries block active thread loops on internal database engines, reducing API capacity and crashing systems.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Implementation Threats</h3>
+      <ol class="threat-toc">
+        <li value="2">
+          <a href="threat-model/index.html#t2-attacker-bypasses-internal-security-to-issue-vc-to-attacker">
+Attacker Bypasses Internal Security to Issue VC to Attacker
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+An attacker bypasses internal architectural or network boundaries to directly invoke backend credential issuance services,
+forging or granting unauthorized credentials to themselves.
+        </li>
+        <li value="3">
+          <a href="threat-model/index.html#t3-interaction-urls-with-origins-that-do-not-match-coordinator-origin">
+Interaction URLs with Origins That Do Not Match Coordinator Origin
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+A coordinator provides an interaction URL whose web origin deviates from the coordinator host origin.
+In a non-malicious application: at best, this goes unnoticed by the user; at worst, it causes confusion for the user when they see
+they are being redirected away from the website they thought they were on or going to, possibly leading them to cancel the interaction.
+With a malicious actor, this would enable cross-site tracking or session hijacking exploits.
+        </li>
+        <li value="9">
+          <a href="threat-model/index.html#t9-wrong-authorization-scope">
+Wrong Authorization Scope
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Access tokens contain overly wide authorization permission settings,
+allowing a compromised unprivileged sub-component to invoke unintended functions.
+        </li>
+        <li value="14">
+          <a href="threat-model/index.html#t14-reusing-presentation-challenges-vs-allowing-network-resiliency">
+Reusing Presentation Challenges vs Allowing Network Resiliency
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Reusing cryptographic challenge tokens to bridge unreliable mobile connections
+allows network sniffers to capture presentation payloads and execute replay attacks.
+        </li>
+        <li value="15">
+          <a href="threat-model/index.html#t15-invalid-assignment-or-overallocation-of-status-list-indexes">
+Invalid Assignment or Overallocation of Status List Indexes
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+The issuer service incorrectly assigns multiple issued credentials to the same index in the status list, or assigns a credential to an index that is not in the list, leading to either incorrect or missing verification results.
+        </li>
+        <li value="16">
+          <a href="threat-model/index.html#t16-too-many-status-lists-created-for-too-small-of-a-population">
+Too Many Status Lists Created for Too Small of a Population
+          </a>
+          <span class="threat-tag threat-tag-privacy">privacy</span> —
+Deployed status lists map to tightly scoped population pools, reducing user tracking privacy and enabling passive metadata linkage.
+        </li>
+        <li value="18">
+          <a href="threat-model/index.html#t18-protocol-confusion-when-multiple-protocol-options-are-available">
+Protocol Confusion When Multiple Protocol Options Are Available
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+A mixed-profile deployment environment allows an adversary to intentionally submit legacy or insecure alternative versions of requests, tricking the coordinator into lowering validation rules.
+        </li>
+        <li value="20">
+          <a href="threat-model/index.html#t20-exchange-state-leaked-to-coordinator-frontend">
+Exchange State Leaked to Coordinator Frontend
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Granular internal processing states bleed out into frontend responses, revealing sensitive system execution parameters to local client scraping or cross-site threats.
+        </li>
+        <li value="22">
+          <a href="threat-model/index.html#t22-misconfigured-issuer-instance">
+Misconfigured Issuer Instance
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+An issuer administrator misconfigures some aspect of the issuance software, whether that be the coordinator service or the workflow service related to issuing credentials, leading to false issuance or an incorrect rejection of an issuance request.
+        </li>
+        <li value="23">
+          <a href="threat-model/index.html#t23-misconfigured-status-instance">
+Misconfigured Status Instance
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+An incorrectly deployed status service allows unauthorized users to write unvetted status indicators or read metrics without proper authorization checks.
+        </li>
+        <li value="24">
+          <a href="threat-model/index.html#t24-misconfigured-verifier-instance">
+Misconfigured Verifier Instance
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+A verifier administrator misconfigures some aspect of the verification software, whether that be the coordinator service or the workflow service related to verifying credentials, leading to inaccurate or wrong verifications.
+        </li>
+        <li value="25">
+          <a href="threat-model/index.html#t25-failure-to-validate-verifier-results-and-semantic-contexts">
+Failure to Validate Verifier Results and Semantic Contexts
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Verification components fail to parse nested semantic outcomes (like specialized `revoked=true` fields) or blindly fetch untrusted external JSON-LD schemas, causing unexpected remote execution patterns.
+        </li>
+        <li value="26">
+          <a href="threat-model/index.html#t26-misconfigured-workflow-instance">
+Misconfigured Workflow Instance
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Flaws in one or more workflows allow a user client to bypass prerequisites, jumping directly into incorrect success or failure states.
+        </li>
+        <li value="27">
+          <a href="threat-model/index.html#t27-workflow-variables-allow-workflow-template-to-be-misused">
+Workflow Variables Allow Workflow Template to be Misused
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Workflow variable options expose unintended workflow paths allowing misused workflows or malicious actors to achieve unintended outcomes for the workflow.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>External Threats</h3>
+      <ol class="threat-toc">
+        <li value="8">
+          <a href="threat-model/index.html#t8-issuer-authentication-leads-to-incorrect-vc-being-issued-to-attacker">
+Issuer Authentication Leads to Incorrect VC Being Issued to Attacker
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Gaps or vulnerabilities within the initial enrollment or proofing layer
+let an attacker successfully spoof an identity verification checkpoint,
+resulting in a legitimate VC mapped to an illegitimate owner.
+        </li>
+        <li value="10">
+          <a href="threat-model/index.html#t10-interaction-url-leads-to-attacker-controlled-website">
+Interaction URL Leads to Attacker-Controlled Website
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+Malicious interaction URL directs users onto phishing, scam, or otherwise unwanted sites built to harvest private data.
+        </li>
+        <li value="11">
+          <a href="threat-model/index.html#t11-holder-shares-credential-with-attacker-for-the-purposes-of-replaying-the-credential">
+Holder Shares Credential with Attacker for the Purposes of Replaying the Credential
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+Social engineering tricks a [=holder=] into presenting an active Verifiable Credential to an adversarial [=verifier=] instance, which then replays the static payload string to a real provider.
+        </li>
+        <li value="12">
+          <a href="threat-model/index.html#t12-use-of-protocol-to-centralize-digital-credentials-ecosystem-and-lockout-competition">
+Use of Protocol to Centralize Digital Credentials Ecosystem and Lockout Competition
+          </a>
+          <span class="threat-tag">market competition</span> —
+Market-dominant platforms choose to only offer their chosen protocol for credential interactions, leading to many holder implementations omitting other protocols.
+        </li>
+        <li value="13">
+          <a href="threat-model/index.html#t13-interaction-url-read-from-qr-code-is-opened-by-unexpected-or-malicious-application">
+Interaction URL Read from QR Code is Opened by Unexpected or Malicious Application
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> <span class="threat-tag threat-tag-privacy">privacy</span> —
+A rogue app present on the [=holder's=] device registers matching protocol handlers, capturing deep link output from scanned QR strings, and takes control of the interaction.
+        </li>
+        <li value="29">
+          <a href="threat-model/index.html#t29-ecosystem-gatekeeping-in-the-name-of-security-or-privacy">
+Ecosystem Gatekeeping in the Name of Security or Privacy
+          </a>
+          <span class="threat-tag">market competition</span> —
+Primary ecosystem actors choose to restrict their support of particular protocols or data formats in the name of security or privacy whereas in reality they are trying to push the ecosystem to adopt their solution.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Dependency Threats</h3>
+      <ol class="threat-toc">
+        <li value="7">
+          <a href="threat-model/index.html#t7-revocation-list-unavailable">
+Revocation List Unavailable
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Whether because an issuing business goes insolvent, permanently shuts down its operations, or simply decides to stop supporting a system, the status service becomes unreachable, breaking verification logic across the ecosystem.
+        </li>
+        <li value="28">
+          <a href="threat-model/index.html#t28-callback-urls-during-workflows-slow-to-respond">
+Callback URLs During Workflows Slow to Respond
+          </a>
+          <span class="threat-tag threat-tag-security">security</span> —
+Downstream consumer webhooks or internal endpoints process calls slowly, filling internal worker pools and triggering cascading system timeouts.
+        </li>
+      </ol>
+    </section>
+
+    <section class="notoc">
+      <h3>Security Considerations</h4>
+      <p>
+  W3C is migrating to a holistic threat modelling approach and is in the process
+  of deprecating the Security Considerations sections in new specifications.
+  Please refer to Appendix [[[#threat-model]]] for documentation related to
+  security considerations.
+      </p>
+    </section>
+
+    <section class="notoc">
+      <h3>Privacy Considerations</h4>
+      <p>
+  W3C is migrating to a holistic threat modelling approach and is in the process
+  of deprecating the Privacy Considerations sections in new specifications. Please
+  refer to Appendix [[[#threat-model]]] for documentation related to privacy
+  considerations.
+      </p>
+    </section>
   </section>
 
   <section class="appendix">
@@ -3670,7 +4119,7 @@ an `ecdsa-rdfc-2019`
 proof|proof=], can still present either. Other [=data integrity proof|proofs=],
 such as those that offer [=selective disclosure=] and / or [=unlinkable
 disclosure=] features require
-<a data-cite="?VC-DATA-INTEGRITY#transformation">transformation</a> (that is, a
+<a data-cite="?VC-DATA-INTEGRITY#transformations">transformation</a> (that is, a
 base proof is transformed to a derived proof plus a "reveal document") and,
 therefore, a wallet will not be able to [=presentation|present=] these [=data
 integrity proof|proofs=] unless the wallet has implemented the procedures for
@@ -3683,7 +4132,7 @@ accident, as it might include information that is secret to the [=holder=].
       <h3>Use of HTTPS for Interaction URLs</h3>
 
       <p>
-This specification strongly suggests the use of HTTPS for interaction URLs
+This specification strongly suggests the use of HTTPS for [=interaction URLs=]
 for the following reasons:
       </p>
 
@@ -4479,182 +4928,6 @@ and contains a `callbackUrl` to demonstrate the callback feature.
     </section>
   </section>
 
-<section class="appendix">
-    <h2>Swimlane Examples for Issuance, Verification, and Presentation</h2>
-
-    <h3>Issuance of a VC to a requesting holder</h3>
-    <p>
-      The following example details a [=holder=] requesting the issuance of a
-      [=verifiable credential=] from an [=issuer=].
-    </p>
-
-    <figure>
-        <pre class="mermaid" style="max-width:100%">
-sequenceDiagram
-    participant H as Holder
-    participant HC as Holder Coordinator
-    participant HS as Holder Service
-    participant IWF as Issuer Workflow Service
-    participant IC as Issuer Coordinator
-    participant IS as Issuer Service
-    
-    Note over H,IS: Prerequisite: Exchange created by Issuer Coordinator
-    
-    H->>HC: Request credential
-    HC->>IWF: POST /workflows/123/exchanges/abc ({})
-
-    Note left of IWF: Initiate exchange by POSTing an empty JSON object.
-
-    IWF->>IC: Coordinate
-    IC->>IC: Apply business rules
-    IC->>IWF: Return VPR (auth request)
-    IWF->>HC: Verifiable Presentation Request
-    
-    HC->>H: (optional) Show consent prompt
-    H->>HC: Approve
-    
-    HC->>HC: Create VP with auth
-    HC->>IWF: POST /workflows/123/exchanges/abc ({verifiablePresentation})
-    IWF->>IC: Validate VP
-    
-    IC->>IS: POST /credentials/issue
-    IS->>IC: Verifiable Credential
-    
-    IC->>IWF: Return VC
-    IWF->>HC: {verifiablePresentation: [VC]}
-    HC->>HS: Store VC
-    HS->>HC: Storage success
-    HC->>H: Display success
-        </pre>
-        <figcaption>
-Issuance of a credential to the requesting holder. 
-        </figcaption>
-    </figure>
-
-    <h3>Verification of a single VC</h3>
-    <p>
-      The following diagram details verification of a single [=verifiable credential=]
-      upon request by a [=holder=]. `GET /credentials/{id}` is used, with the [=holder
-      coordinator=] doing the work of generating the [=verifiable presentation=] that
-      is then sent to the [=verifier=]. In contrast to the preceding issuance example,
-      the verifier does not make any auth request in this [=workflow=]. If the
-      [=verifier=] wanted, they could do another back-and-forth with the [=holder=]
-      before deciding to verify the provided [=verifiable presentation=].
-    </p>
-    <figure>
-        <pre class="mermaid" style="max-width:100%">
-sequenceDiagram
-    participant H as Holder
-    participant HC as Holder Coordinator
-    participant HS as Holder Service
-    participant VWF as Verifier Workflow Service
-    participant VC as Verifier Coordinator
-    participant VS as Verifier Service
-    
-    Note over H,VS: Prerequisite: Exchange created by Verifier Coordinator
-    
-    H->>HC: Request verification of VC-098
-    HC->>HS: GET /credentials/{id} (id:VC-098)
-    HS->>HC: Requested VC-098
-    HC->>HC: Create VP with auth and selected VC-098 to verify
-    HC->>VWF: POST /workflows/456/exchanges/ghi ({createdVP})
-
-    Note left of VWF: Initiate exchange including the created VP.
-
-    VWF->>VC: Validate VP
-    VC->>VC: Apply business rules
-    VC->>VC: Extract contained VC-098 from VP
-    VC->>VS: POST /credentials/verify ({extractedVC-098})
-
-    VS->>VC: Verification Result
-    VC->>VWF: Verification result
-    VWF->>HC: Verification result
-    HC->>H: Display verification result
-        </pre>
-        <figcaption>
-Verification of a single credential.
-        </figcaption>
-    </figure>
-
-    <h3>Verification of a multiple VCs</h3>
-    <p>
-      The following diagram details the verification of multiple [=verifiable credential=]
-      at the request of a [=holder=]. It shows the use of the POST /presentations to create the
-      [=verifiable presentation=], with the [=holder service=]  doing the work of generating
-      the [=verifiable presentation=] that is sent to the [=verifier=]. The [=workflow=]
-      shown here does not have the verifier doing any auth request as seen in the issuance example 
-      above. If the [=verifier=] wanted they could do another back and forth with the [=holder=]
-      before deciding to verify the provided [=verifiable presentation=].
-    </p>
-    <figure>
-        <pre class="mermaid" style="max-width:100%">
-sequenceDiagram
-    participant H as Holder
-    participant HC as Holder Coordinator
-    participant HS as Holder Service
-    participant VWF as Verifier Workflow Service
-    participant VC as Verifier Coordinator
-    participant VS as Verifier Service
-    
-    Note over H,VS: Prerequisite: Exchange created by Verifier Coordinator
-    
-    H->>HC: Request verification of a set of VCs
-    HC->>HS: POST /presentations ({setofVCs})
-    HS->>HS: Create VP with specified VCs
-    HS->>HC: Requested VP
-    HC->>VWF: POST /workflows/456/exchanges/ghi ({verifiablePresentation})
-
-    Note left of VWF: Initiate exchange including the requested VP.
-
-    VWF->>VC: Validate VP
-    VC->>VC: Apply business rules
-    VC->>VS: POST /presentations/verify ({verifiablePresentation})
-
-    VS->>VC: Verification Result
-    VC->>VWF: Verification result
-    VWF->>HC: Verification result
-    HC->>H: Display verification result
-        </pre>
-        <figcaption>
-Verification of multiple credentials in one presentation.
-        </figcaption>
-    </figure>
-
-    <h3>Presentation of a VC in person</h3>
-    <p>
-      The following diagram details the presentation of a [=verifiable credential=] at the
-      request of a [=holder=] to another person, Alice, who might be a [=verifier=] or
-      another [=holder=]. The presenting [=holder=] uses `GET /presentations/{id}`, 
-      which implies that this [=holder=] has presented this same credential in the past, and the [=holder coordinator=] knows the id to request the existing presentation.
-    </p>
-    <figure>
-        <pre class="mermaid" style="max-width:100%">
-sequenceDiagram
-    participant H as Holder
-    participant HC as Holder Coordinator
-    participant HS as Holder Service
-    participant A as Alice
-    participant AHC as Alice's Holder Coordinator
-    
-    H->>HC: Select VC to present
-    HC->>HS: GET /presentations/{id} (id:presentationId)
-    HS->>HS: Generate VP with selected VC
-    HS->>HC: Generated VP
-
-    HC->>HC: Encode VP as QR Code
-    HC->>H: Display QR Code
-
-    H->>A: Show displayed QR Code
-    A->>AHC: Start camera
-    AHC->>HC: Scan presented QR Code
-        </pre>
-        <figcaption>
-Presentation of a VC in person
-        </figcaption>
-    </figure>
-   
-  </section>
-
   <section class="appendix">
     <h2>Relationship to Other Specifications</h2>
 
@@ -4664,8 +4937,8 @@ The lifecycle of a [=verifiable credential=] includes the creation of a
 status management, local credential administration, presentation, verification, and validation. This
 specification defines an HTTP-based API for [=verifiable credential=] lifecycle
 management that can be used by [=issuers=], [=holders=], and [=verifiers=].
-There are other specifications, such as the [[[DCAPI]]], [[[OID4VCI]]], and
-[[[OID4VP]]] that might seem to provide similar functionality to this
+There are other specifications, such as [[[digital-credentials]]], [[[OPENID4VCI]]], and
+[[[OPENID4VP]]] that might seem to provide similar functionality to this
 specification. This section explains what other specifications have been
 considered before the standardization of this specification, and how this
 specification differs from other specifications in the ecosystem.
@@ -4678,7 +4951,7 @@ credential format, credential query language, and credential delivery protocol. 
 credential format that is expressible as a [=verifiable credential=] or an
 <a data-cite="VC-DATA-MODEL-2.0#enveloped-verifiable-credentials">enveloped
 verifiable credential</a> can be used with this specification. Similarly,
-credential delivery protocols such as [[[OID4VCI]]] or [[[OID4VP]]] can be used
+credential delivery protocols such as [[[OPENID4VCI]]] or [[[OPENID4VP]]] can be used
 in [=interactions=] and [=exchanges=] defined by this specification. Finally,
 this specification supports multiple credential query languages to provide for
 flexibility as technologies improve and market verticals specialize.
@@ -4708,15 +4981,30 @@ becomes a W3C Proposed Recommendation.
         <dt>Scheme name:</dt>
         <dd>interaction</dd>
         <dt>Status:</dt>
-        <dd>Permanent</dd>
+        <dd>Provisional</dd>
         <dt>Applications/protocols that use this scheme name:</dt>
-        <dd>Section [[[#initiating-interactions]]] of this specification.</dd>
+        <dd>[[[VCALM]]], Section [[[#initiating-interactions]]]</dd>
         <dt>Contact:</dt>
-        <dd><a href="mailto:ivan@w3.org">Ivan Herman</a>, W3C Staff Contact</dd>
+        <dd><a href="mailto:public-vc-wg@w3.org">W3C Verifiable Credentials Working Group</a></dd>
         <dt>Change controller:</dt>
         <dd><a href="mailto:public-vc-wg@w3.org">W3C Verifiable Credentials Working Group</a></dd>
         <dt>References</dt>
-        <dd><a href=".">VCALM v1.0</a></dd>
+        <dd>[[[VCALM]]]</dd>
+      </dl>
+
+      <dl>
+        <dt>Scheme name:</dt>
+        <dd>web+interaction</dd>
+        <dt>Status:</dt>
+        <dd>Provisional</dd>
+        <dt>Applications/protocols that use this scheme name:</dt>
+        <dd>[[[VCALM]]], Section [[[#initiating-interactions]]]</dd>
+        <dt>Contact:</dt>
+        <dd><a href="mailto:public-vc-wg@w3.org">W3C Verifiable Credentials Working Group</a></dd>
+        <dt>Change controller:</dt>
+        <dd><a href="mailto:public-vc-wg@w3.org">W3C Verifiable Credentials Working Group</a></dd>
+        <dt>References</dt>
+        <dd>[[[VCALM]]]</dd>
       </dl>
     </section>
   </section>
