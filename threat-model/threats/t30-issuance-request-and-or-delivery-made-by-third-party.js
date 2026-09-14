@@ -2,7 +2,7 @@
     var threat = {
         id: "T30",
         name: "Issuance Request and/or Delivery Made by Third Party",
-        desc: "Verifiable credentials issuance has a request phase and a delivery phase. The request might be made by the subject or another role, and delivery can be to a client that might or might not be controlled by the subject.",
+        desc: "There is no guarantee nor general requirement that a request for the issuance of a verifiable credential is being made by a subject of the credential. Similarly, there is no guarantee that such a credential is being delivered to a wallet controlled by a subject of that credential. Workflows allowing such loosely coupled behaviors are generally considered to be a benefit of the verifiable credential ecosystem, though it is important that issuers, holders, and verifiers be aware of the possibilities.",
         response: [
             { id: "R45", name: "Cryptographic Delegation", type: "Reduce", desc: "Use of cryptographically bound delegation techniques, such as zCaps, allow for third parties to act on behalf of the subject." }
         ],
