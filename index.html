@@ -5062,11 +5062,43 @@ Verification of multiple credentials in one presentation.
         </figcaption>
     </figure>
 
-    <h3>Presentation of a VC in person</h3>
+    <h3>Presenatation of a VC in person</h3>
     <p>
-      The following diagram details the presentation of a [=verifiable credential=] at the request of a [=holder=] to 
+      The following diagram details the presentation of a [=verifiable credential=] at the request of a [=holder=] to
+      another person, Tiffany. It shows the use of GET /credentials/{id} returns the specified [=verifiable credential=] 
+      to the [=holder coordinator=] to be packaged in a QR Code that can be read by Tiffany's device.
+    </p>
+    <figure>
+        <pre class="mermaid" style="max-width:100%">
+sequenceDiagram
+    participant H as Holder
+    participant HC as Holder Coordinator
+    participant HS as Holder Service
+    participant T as Tiffany
+    participant THC as Tiffany's Holder Coordinator
+    
+    H->>HC: Select VC to present
+    HC->>HS: GET /credentials/{id} (id:credentialId)
+    HS->>HC: Requested VC
+
+    HC->>HC: Encode VC as QR Code
+    HC->>H: Display QR Code
+
+    H->>T: Show displayed QR Code
+    T->>THC: Start camera
+    THC->>HC: Scan presented QR Code
+        </pre>
+        <figcaption>
+Presentation of a VC in person
+        </figcaption>
+    </figure>
+
+
+    <h3>Presentation of a VP in person</h3>
+    <p>
+      The following diagram details the presentation of a [=verifiable presentation=] at the request of a [=holder=] to 
       another person, Alice. It shows the use of the GET /presentations/{id} implying that the [=holder=] has 
-      presented this same credential in the past, and the [=holder coordinator=] knows the id to request the existing
+      presented this same presentation in the past, and the [=holder coordinator=] knows the id to request the existing
       presentation.
     </p>
     <figure>
@@ -5091,7 +5123,7 @@ sequenceDiagram
     AHC->>HC: Scan presented QR Code
         </pre>
         <figcaption>
-Presentation of a VC in person
+Presentation of a VP in person
         </figcaption>
     </figure>
   </section>
