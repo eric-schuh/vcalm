@@ -8,7 +8,6 @@
         ],
         elements: ["E1", "P5", "P4"],
         tags: ["security"],
-        tags: ["security"],
         taxonomyName: "STRIDE",
         taxonomyClass: "Tampering"
     };

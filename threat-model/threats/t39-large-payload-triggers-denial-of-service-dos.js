@@ -8,7 +8,6 @@
         ],
         elements: ["P2", "P1", "P4", "P5", "F12", "F19", "P3", "F9"],
         tags: ["security"],
-        tags: ["security"],
         taxonomyName: "STRIDE",
         taxonomyClass: "Denial of Service"
     };
