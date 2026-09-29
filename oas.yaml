@@ -1073,7 +1073,7 @@ components:
                 $ref: "./components/VerifiablePresentation.yml#/components/schemas/VerifiablePresentation"
             referenceId:
               type: string
-              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.   
+              description: If the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.   
         - type: object
           required:
             - exchangeVerifiablePresentation
@@ -1082,7 +1082,7 @@ components:
               $ref: "./components/ExchangeVerifiablePresentation.yml#/components/schemas/ExchangeVerifiablePresentation"
             referenceId:
               type: string
-              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
+              description: If the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           required:
             - exchangeVerifiablePresentation
@@ -1094,7 +1094,7 @@ components:
                 $ref: "../components/ExchangeVerifiablePresentation.yml#/components/schemas/ExchangeVerifiablePresentation"
             referenceId:
               type: string
-              description: When the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
+              description: If the server previously sent a referenceId, the client SHOULD include it here to aid debugging and message correlation. The value SHOULD be a <code>urn:uuid</code> value.
         - type: object
           required:
             - redirectUrl

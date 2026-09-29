@@ -29,9 +29,9 @@ components:
                 A JSON object that enables exchange specific data to be sent when a
                 VPR makes a request for some data not normally contained in a verifiable
                 presentation. To give some examples: if a VPR requests a VC using BBS, 
-                this field would contain the commitment information to create a pseudonym,
+                this field would contain the commitment information to create a pseudonym;
                 if a VPR asks for zcaps, this field would contain the reference IDs 
-                for each zcap to be generated, if a VPR request needs additional payment
+                for each zcap to be generated; if a VPR request needs additional payment
                 information, this field would contain the requested data.
       example:
         {
