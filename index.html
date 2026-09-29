@@ -4912,7 +4912,7 @@ and contains a `callbackUrl` to demonstrate the callback feature.
 
     <h3>Issuance of a VC to a requesting holder</h3>
     <p>
-      The below example details a [=holder=] requesting the issuance of a [=verifiable credential=] from an [=issuer=].
+      The following example details a [=holder=] requesting the issuance of a [=verifiable credential=] from an [=issuer=].
     </p>
 
     <figure>
@@ -4961,9 +4961,9 @@ Issuance of a credential to the requesting holder.
     <h3>Verification of a single VC</h3>
     <p>
       The following diagram details the verification of a single [=verifiable credential=] at the request of a [=holder=].
-      It shows the use of the GET /credentials/{id} with the [=holder coordinator=] doing the work of generating the 
+      It shows the use of `GET /credentials/{id}` with the [=holder coordinator=] doing the work of generating the 
       [=verifiable presentation=] that is sent to the [=verifier=]. The [=workflow=] shown here does not have the verifier
-      doing any auth request as seen in the issuance example above. If the [=verifier=] wanted they could do another back
+      doing any auth request as seen in the preceding issuance example. If the [=verifier=] wanted, they could do another back
       and forth with the [=holder=] before deciding to verify the provided [=verifiable presentation=].
     </p>
     <figure>
@@ -5003,10 +5003,11 @@ Verification of a single credential.
     <h3>Verification of multiple VCs</h3>
     <p>
       The following diagram details the verification of multiple [=verifiable credential=] at the request of a [=holder=].
-      It shows the use of the POST /presentations to create the [=verifiable presentation=], with the [=holder service=] 
+      It shows the use of `POST /presentations` to create the [=verifiable presentation=], with the [=holder service=] 
       doing the work of generating the [=verifiable presentation=] that is sent to the [=verifier=]. 
-      The [=workflow=] shown here does not have the verifier doing any auth request as seen in the issuance example above. 
-      If the [=verifier=] wanted they could do another back and forth with the [=holder=] before deciding to verify the provided [=verifiable presentation=].
+      The [=workflow=] shown here does not have the verifier doing any auth request as seen in the preceding issuance example.
+      If the [=verifier=] wanted, they could do another back and forth with the [=holder=] before deciding to verify the
+      provided [=verifiable presentation=].
     </p>
     <figure>
         <pre class="mermaid" style="max-width:100%">
@@ -5044,8 +5045,8 @@ Verification of multiple credentials in one presentation.
     <h3>Presentation of a VC in person</h3>
     <p>
       The following diagram details the presentation of a [=verifiable credential=] at the request of a [=holder=] to
-      another person, Tiffany. It shows the use of GET /credentials/{id} returns the specified [=verifiable credential=] 
-      to the [=holder coordinator=] to be packaged in a QR Code that can be read by Tiffany's device.
+      another person, Tiffany. It shows the use of `GET /credentials/{id}` to return the specified [=verifiable credential=] 
+      to the [=holder coordinator=], to be packaged in a QR Code that can be read by Tiffany's device.
     </p>
     <figure>
         <pre class="mermaid" style="max-width:100%">
@@ -5076,8 +5077,8 @@ Presentation of a VC in person
     <h3>Presentation of a VP in person</h3>
     <p>
       The following diagram details the presentation of a [=verifiable presentation=] at the request of a [=holder=] to 
-      another person, Alice. It shows the use of the GET /presentations/{id} implying that the [=holder=] has 
-      presented this same presentation in the past, and the [=holder coordinator=] knows the id to request the existing
+      another person, Alice. It shows the use of `GET /presentations/{id}` implying that the [=holder=] has 
+      presented this same presentation in the past, and that the [=holder coordinator=] knows the `id` to request the existing
       presentation.
     </p>
     <figure>
