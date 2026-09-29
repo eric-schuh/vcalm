@@ -2,7 +2,7 @@
   "@context": {
     "@protected": true,
     "exchangeData": {
-      "@id": "https://w3id.org/vcalm#exchangeData",
+      "@id": "https://www.w3.org/2018/credentials#exchangeData",
       "@type": "@json"
     }
   }
