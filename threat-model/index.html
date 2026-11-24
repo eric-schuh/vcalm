@@ -5,7 +5,7 @@
   <title>VCALM Threat Model</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c"
     class="remove"></script>
-  <script src="threats/threat-model.js"></script> <!-- must precede the respec config-->
+  <script src="threats/threat-model.js" class="remove"></script> <!-- must precede the respec config-->
 
 
   <script class='remove'>
@@ -19,32 +19,15 @@
       shortName: "vcalm-1.0",
 
       // specification status (e.g., WD, LCWD, NOTE, etc.). If in doubt use ED.
-      specStatus: "ED",
+      specStatus: "NOTE",
       noRecTrack: "true",
       maxTocLevel: 4,
       threatModelTocSelector: "#threat-model-toc",
       threatModelDetailsSelector: "#threat-model-details",
       preProcess: [window.ThreatModel.render],
 
-      // W3C Candidate Recommendation information
-      //crEnd: "2021-05-04",
-      //implementationReportURI: "https://w3c.github.io/vcalm-test-suite/",
-
-      // Editor's Draft URL
-      //latestVersion: "https://www.w3.org/community/reports/credentials/CG-FINAL-vcalm-20260320/",
-      //edDraftURI: "https://w3c.github.io/vcalm/",
-
-
       // subtitle for the spec
       subtitle: "A Threat Model for the Verifiable Credential API for Lifecycle Management",
-
-      // if you wish the publication date to be other than today, set this
-      //publishDate:  "2026-03-20",
-
-      // previously published draft, uncomment this and set its
-      // YYYY-MM-DD date and its maturity status
-      //previousPublishDate:  "2021-03-01",
-      //previousMaturity:  "WD",
 
       // automatically allow term pluralization
       pluralize: true,
@@ -53,7 +36,7 @@
       localBiblio: {
       },
       xref: [
-        "web-platform", "infra", "url", "vc-data-model-2.0", "did", "vc-data-integrity", "vc-recognized-entities"
+        "web-platform", "infra", "url", "vc-data-model-2.0", "did", "vc-data-integrity", "vc-recognized-entities", "vcalm-1.0"
       ],
       github: {
         repoURL: "https://github.com/w3c/vcalm/",
@@ -65,7 +48,7 @@
       editors: [{
         name: "Eric Schuh",
         company: "Legendary Requirements",
-        companyURL: "legreq.com",
+        companyURL: "https://legreq.com",
         w3cid: 152695
       }],
 
@@ -83,46 +66,46 @@
 
 
   </script>
-  <script src="threats/outline.js"></script>
+  <script class="remove" src="threats/outline.js"></script>
   <link rel="stylesheet" href="threats/threat-model.css" />
-  <script src="threats/t1-dos-attacks-against-public-coordinator-endpoints.js"></script>
-  <script src="threats/t2-attacker-bypasses-internal-security-to-issue-vc-to-attacker.js"></script>
-  <script src="threats/t3-interaction-urls-with-origins-that-do-not-match-coordinator-origin.js"></script>
-  <script src="threats/t4-attacker-guesses-exchange-url.js"></script>
-  <script src="threats/t5-issuance-information-stored-long-term.js"></script>
-  <script src="threats/t6-stolen-authorization-tokens.js"></script>
-  <script src="threats/t7-revocation-list-unavailable.js"></script>
-  <script src="threats/t8-issuer-authentication-leads-to-incorrect-vc-being-issued-to-attacker.js"></script>
-  <script src="threats/t9-wrong-authorization-scope.js"></script>
-  <script src="threats/t10-interaction-url-leads-to-attacker-controlled-website.js"></script>
-  <script src="threats/t11-holder-shares-credential-with-attacker-for-the-purposes-of-replaying-the-credential.js"></script>
-  <script src="threats/t12-use-of-protocol-to-centralize-digital-credentials-ecosystem-and-lockout-competition.js"></script>
-  <script src="threats/t13-interaction-url-read-from-qr-code-is-opened-by-unexpected-or-malicious-application.js"></script>
-  <script src="threats/t14-reusing-presentation-challenges-vs-allowing-network-resiliency.js"></script>
-  <script src="threats/t15-invalid-assignment-or-overallocation-of-status-list-indexes.js"></script>
-  <script src="threats/t16-too-many-status-lists-created-for-too-small-of-a-population.js"></script>
-  <script src="threats/t17-leaking-information-due-to-status-list-vc-updates.js"></script>
-  <script src="threats/t18-protocol-confusion-when-multiple-protocol-options-are-available.js"></script>
-  <script src="threats/t19-interaction-urls-leak-personal-ips.js"></script>
-  <script src="threats/t20-exchange-state-leaked-to-coordinator-frontend.js"></script>
-  <script src="threats/t21-dos-for-exchange-state-polling.js"></script>
-  <script src="threats/t22-misconfigured-component-instance.js"></script>
-  <script src="threats/t25-failure-to-validate-verifier-results-and-semantic-contexts.js"></script>
-  <script src="threats/t27-workflow-variables-allow-workflow-template-to-be-misused.js"></script>
-  <script src="threats/t28-callback-urls-during-workflows-slow-to-respond.js"></script>
-  <script src="threats/t29-ecosystem-gatekeeping-in-the-name-of-security-or-privacy.js"></script>
-  <script src="threats/t41-issuance-request-and-or-delivery-made-by-third-party.js"></script>
-  <script src="threats/t31-unintended-data-leak-due-to-third-party-processing.js"></script>
-  <script src="threats/t32-malicious-entity-acts-on-behalf-of-incapable-party.js"></script>
-  <script src="threats/t33-verifier-phones-home-about-specific-verifiable-credential.js"></script>
-  <script src="threats/t34-unknown-proof-types.js"></script>
-  <script src="threats/t35-interaction-url-does-not-use-https.js"></script>
-  <script src="threats/t36-deletion-request-only-results-in-partial-deletion-of-credential.js"></script>
-  <script src="threats/t37-credential-deletion-violates-legal-regulation.js"></script>
-  <script src="threats/t38-mishandled-status-information-upon-credential-deletion-reveals-information.js"></script>
-  <script src="threats/t39-large-payload-triggers-denial-of-service-dos.js"></script>
-  <script src="threats/t40-improper-credential-validation-leads-to-security-vulnerabilities.js"></script>
-  <script src="threats/t41-shoulder-surfed-interaction-url.js"></script>
+  <script class="remove" src="threats/t1-dos-attacks-against-public-coordinator-endpoints.js"></script>
+  <script class="remove" src="threats/t2-attacker-bypasses-internal-security-to-issue-vc-to-attacker.js"></script>
+  <script class="remove" src="threats/t3-interaction-urls-with-origins-that-do-not-match-coordinator-origin.js"></script>
+  <script class="remove" src="threats/t4-attacker-guesses-exchange-url.js"></script>
+  <script class="remove" src="threats/t5-issuance-information-stored-long-term.js"></script>
+  <script class="remove" src="threats/t6-stolen-authorization-tokens.js"></script>
+  <script class="remove" src="threats/t7-revocation-list-unavailable.js"></script>
+  <script class="remove" src="threats/t8-issuer-authentication-leads-to-incorrect-vc-being-issued-to-attacker.js"></script>
+  <script class="remove" src="threats/t9-wrong-authorization-scope.js"></script>
+  <script class="remove" src="threats/t10-interaction-url-leads-to-attacker-controlled-website.js"></script>
+  <script class="remove" src="threats/t11-holder-shares-credential-with-attacker-for-the-purposes-of-replaying-the-credential.js"></script>
+  <script class="remove" src="threats/t12-use-of-protocol-to-centralize-digital-credentials-ecosystem-and-lockout-competition.js"></script>
+  <script class="remove" src="threats/t13-interaction-url-read-from-qr-code-is-opened-by-unexpected-or-malicious-application.js"></script>
+  <script class="remove" src="threats/t14-reusing-presentation-challenges-vs-allowing-network-resiliency.js"></script>
+  <script class="remove" src="threats/t15-invalid-assignment-or-overallocation-of-status-list-indexes.js"></script>
+  <script class="remove" src="threats/t16-too-many-status-lists-created-for-too-small-of-a-population.js"></script>
+  <script class="remove" src="threats/t17-leaking-information-due-to-status-list-vc-updates.js"></script>
+  <script class="remove" src="threats/t18-protocol-confusion-when-multiple-protocol-options-are-available.js"></script>
+  <script class="remove" src="threats/t19-interaction-urls-leak-personal-ips.js"></script>
+  <script class="remove" src="threats/t20-exchange-state-leaked-to-coordinator-frontend.js"></script>
+  <script class="remove" src="threats/t21-dos-for-exchange-state-polling.js"></script>
+  <script class="remove" src="threats/t22-misconfigured-component-instance.js"></script>
+  <script class="remove" src="threats/t25-failure-to-validate-verifier-results-and-semantic-contexts.js"></script>
+  <script class="remove" src="threats/t27-workflow-variables-allow-workflow-template-to-be-misused.js"></script>
+  <script class="remove" src="threats/t28-callback-urls-during-workflows-slow-to-respond.js"></script>
+  <script class="remove" src="threats/t29-ecosystem-gatekeeping-in-the-name-of-security-or-privacy.js"></script>
+  <script class="remove" src="threats/t41-issuance-request-and-or-delivery-made-by-third-party.js"></script>
+  <script class="remove" src="threats/t31-unintended-data-leak-due-to-third-party-processing.js"></script>
+  <script class="remove" src="threats/t32-malicious-entity-acts-on-behalf-of-incapable-party.js"></script>
+  <script class="remove" src="threats/t33-verifier-phones-home-about-specific-verifiable-credential.js"></script>
+  <script class="remove" src="threats/t34-unknown-proof-types.js"></script>
+  <script class="remove" src="threats/t35-interaction-url-does-not-use-https.js"></script>
+  <script class="remove" src="threats/t36-deletion-request-only-results-in-partial-deletion-of-credential.js"></script>
+  <script class="remove" src="threats/t37-credential-deletion-violates-legal-regulation.js"></script>
+  <script class="remove" src="threats/t38-mishandled-status-information-upon-credential-deletion-reveals-information.js"></script>
+  <script class="remove" src="threats/t39-large-payload-triggers-denial-of-service-dos.js"></script>
+  <script class="remove" src="threats/t40-improper-credential-validation-leads-to-security-vulnerabilities.js"></script>
+  <script class="remove" src="threats/t41-shoulder-surfed-interaction-url.js"></script>
 </head>
 
 <body>
@@ -285,7 +268,7 @@
         </figcaption>
       </figure>
     </section>
-      <h3>Data Flow Description</h3>
+      <h3 id="data-flow-decsription">Data Flow Description</h3>
         <p>The interaction begins with <strong>Sachin</strong> (<a>E1</a>) opening his <strong>phone’s</strong> (<a>C1</a>)
           <strong>browser</strong> (<a>P2</a>) to the <strong>State of Utopia’s Incident Command website</strong> (<a>P4</a>) (<a>F0</a>).
           Here he navigates to find the incident he is traveling to and selects to register as an EMT for the incident (<a>F1</a>).
@@ -710,7 +693,7 @@
             </td>
           </tr>
           <tr>
-            <td class="left"><dfn data-lt="T1|T1 State of Newtopia Trust Boundary|State of Newtopia Trust Boundary">T1 State of Newtopia Trust Boundary</dfn></td>
+            <td class="left"><dfn data-lt="T2|T2 State of Newtopia Trust Boundary|State of Newtopia Trust Boundary">T2 State of Newtopia Trust Boundary</dfn></td>
             <td>
               The boundary between the State of Utopia’s Incident Command software (<a>C5</a>) and the State of Newtopia’s software (<a>C6</a>).
             </td>
